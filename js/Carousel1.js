@@ -3,7 +3,7 @@ var nameOfPosition;
 
 var currentObject;
 var currentObjectName;
-let CorrectAnswers = ['ArribaPiedra','ArribaCasa','DentroCasa','AtrasHongo','DentroValde']
+let CorrectAnswers = ['ArribaPiedra', 'ArribaCasa', 'DentroCasa', 'AtrasHongo', 'DentroValde']
 // Función para crear un controlador de carrusel
 function createCarouselController1(carousel) {
     const items = carousel.querySelectorAll('.item');
@@ -13,14 +13,14 @@ function createCarouselController1(carousel) {
     let startX = 0;
     let lastTouchX = 0;
 
-    
+
 
 
 
     function normalizeIndex(index) {
         return ((index % totalItems) + totalItems) % totalItems;
 
-        
+
     }
 
     function updateItemsPosition() {
@@ -28,10 +28,10 @@ function createCarouselController1(carousel) {
         items.forEach((item, index) => {
             const diff = normalizeIndex(index - currentIndex);
             const x = diff * spacing;
-            
+
             item.style.transform = `translateX(calc(-50% + ${x}px))`;
             item.style.display = Math.abs(diff) <= 2 ? 'flex' : 'none';
-            
+
             if (index === currentIndex) {
                 item.classList.add('active');
             } else {
@@ -54,16 +54,16 @@ function createCarouselController1(carousel) {
 
     function handleTouchMove(e) {
         if (!isDragging) return;
-        
+
         const touchX = e.touches[0].clientX;
         const deltaX = lastTouchX - touchX;
         lastTouchX = touchX;
 
         if (Math.abs(deltaX) > 1) {
             if (deltaX > 0) {
-                currentIndex = normalizeIndex(currentIndex + 1); 
+                currentIndex = normalizeIndex(currentIndex + 1);
             } else {
-                currentIndex = normalizeIndex(currentIndex - 1);              
+                currentIndex = normalizeIndex(currentIndex - 1);
             }
             updateItemsPosition();
             isDragging = false;
@@ -85,9 +85,9 @@ function createCarouselController1(carousel) {
 
     function handleDragMove(e) {
         if (!isDragging) return;
-        
+
         const deltaX = startX - e.pageX;
-        
+
         if (Math.abs(deltaX) > 50) {
             if (deltaX > 0) {
                 currentIndex = normalizeIndex(currentIndex + 1);
@@ -112,12 +112,12 @@ function createCarouselController1(carousel) {
     document.addEventListener('mousemove', handleDragMove);
     document.addEventListener('mouseup', handleDragEnd);
     carousel.addEventListener('dragstart', (e) => e.preventDefault());
-
+    cambiarImagen()
     updateItemsPosition()
     return updateItemsPosition;
 
 
-        
+
 
 }
 
@@ -129,14 +129,14 @@ function createCarouselController2(carousel) {
     let startX = 0;
     let lastTouchX = 0;
 
-    
+
 
 
 
     function normalizeIndex(index) {
         return ((index % totalItems) + totalItems) % totalItems;
 
-        
+
     }
 
     function updateItemsPosition() {
@@ -144,10 +144,10 @@ function createCarouselController2(carousel) {
         items.forEach((item, index) => {
             const diff = normalizeIndex(index - currentIndex);
             const x = diff * spacing;
-            
+
             item.style.transform = `translateX(calc(-50% + ${x}px))`;
             item.style.display = Math.abs(diff) <= 2 ? 'flex' : 'none';
-            
+
             if (index === currentIndex) {
                 item.classList.add('active');
             } else {
@@ -170,16 +170,16 @@ function createCarouselController2(carousel) {
 
     function handleTouchMove(e) {
         if (!isDragging) return;
-        
+
         const touchX = e.touches[0].clientX;
         const deltaX = lastTouchX - touchX;
         lastTouchX = touchX;
 
         if (Math.abs(deltaX) > 1) {
             if (deltaX > 0) {
-                currentIndex = normalizeIndex(currentIndex + 1); 
+                currentIndex = normalizeIndex(currentIndex + 1);
             } else {
-                currentIndex = normalizeIndex(currentIndex - 1);              
+                currentIndex = normalizeIndex(currentIndex - 1);
             }
             updateItemsPosition();
             isDragging = false;
@@ -201,9 +201,9 @@ function createCarouselController2(carousel) {
 
     function handleDragMove(e) {
         if (!isDragging) return;
-        
+
         const deltaX = startX - e.pageX;
-        
+
         if (Math.abs(deltaX) > 50) {
             if (deltaX > 0) {
                 currentIndex = normalizeIndex(currentIndex + 1);
@@ -233,9 +233,11 @@ function createCarouselController2(carousel) {
     return updateItemsPosition;
 
 
-        
+
 
 }
+
+
 function mostrarDatos() {
 
     let Asnwer = nameOfPosition + currentObjectName;
@@ -246,6 +248,23 @@ function mostrarDatos() {
     }
 
 }
+
+function cambiarImagen() {
+    // Array con las posibles imágenes
+    
+
+    let imagenes = ["/images/animales/aveCelular.png", "/images/animales/gatoCelular.png",
+        "/images/animales/osoCelular.png", "/images/animales/ranaCelular.png", "/images/animales/ratonCelular.png"
+    ];
+    // Elegimos una imagen aleatoria
+    let imagenAleatoria = imagenes[Math.floor(Math.random() * imagenes.length)];
+
+    // Asignamos el src a la imagen
+    document.getElementById("imageToFoud").setAttribute("src", imagenAleatoria);
+    let src = document.getElementById("imageToFoud").src;
+    console.log(src)
+}
+
 
 // Inicializar ambos carruseles
 const carousel1 = document.querySelectorAll('.carousel1');
