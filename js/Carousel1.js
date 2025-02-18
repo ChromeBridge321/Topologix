@@ -1,10 +1,50 @@
-var currentPosition;
-var nameOfPosition;
+let currentPosition; // variable que muestra la posicion actual de la imagen actual
+let nameOfPosition;// variable que muestra el nombre asignado a la posicion actual de imagen
+let currentObject;// variable que muestra la posicion del la imagen objeto
+let currentObjectName; // variable que muestra el nombre del la imagen objeto actual
 
-var currentObject;
-var currentObjectName;
-let CorrectAnswers = ['ArribaPiedra', 'ArribaCasa', 'DentroCasa', 'AtrasHongo', 'DentroValde']
+//obejtos que contendran propiedades que se utilizaran en la ejecucion de algunas funciones
+const ave = {
+    nombre: "ave",
+    src: "/images/animales/aveCelular.png"
+};
+
+const gato = {
+    nombre: "gato",
+    src: "/images/animales/gatoCelular.png"
+};
+
+const oso = {
+    nombre: "oso",
+    src: "/images/animales/osoCelular.png"
+};
+
+
+const rana = {
+    nombre: "rana",
+    src: "/images/animales/ranaCelular.png"
+};
+
+
+const raton = {
+    nombre: "raton",
+    src: "/images/animales/ratonCelular.png"
+};
+
+
+let imagenes = [gato, ave, oso, rana, raton]; // varibale que guarda a los obejetos
+let imagenAleatoria = imagenes[Math.floor(Math.random() * imagenes.length)]; // seleccion de una posicion aleatoria del array imagenes
+let CorrectAnswers = ['aveArribaPiedra', 'osoArribaCasa', 'ranaDentroCasa', 'gatoAtrasHongo', 'ratonDentroValde']
+let respuestas = JSON.parse(localStorage.getItem("respuestas")) || []; // array para guardar las respuestas correctas
+let contador = parseInt(localStorage.getItem("contador")) || 0; // determinara si ya se han alcanzado todas las respuestas
+// Reproducir el sonido correspondiente
+const sonidoCorrecto = document.getElementById("sonidoCorrecto");
+const sonidoIncorrecto = document.getElementById("sonidoIncorrecto");
+const sonidoSuperado = document.getElementById("sonidoSuperado");
+console.log("Respuestas actuales:", respuestas + ' contador: ' + contador);
+
 // Función para crear un controlador de carrusel
+// funciones que manejan las animaciones y traslacion de los carruseles por separado
 function createCarouselController1(carousel) {
     const items = carousel.querySelectorAll('.item');
     const totalItems = items.length;
@@ -39,10 +79,8 @@ function createCarouselController1(carousel) {
             }
         });
 
-        console.log(currentIndex);
-        console.log((items[currentIndex]['children'][1]).name);
-        currentPosition = currentIndex;
-        nameOfPosition = (items[currentPosition]['children'][1]).name;
+        currentPosition = currentIndex; // asignamos el valor de la imagen actual a la variable
+        nameOfPosition = (items[currentPosition]['children'][1]).name; // asignamos el nombre de la imagen actual a la variable
     }
 
     function handleTouchStart(e) {
@@ -112,7 +150,7 @@ function createCarouselController1(carousel) {
     document.addEventListener('mousemove', handleDragMove);
     document.addEventListener('mouseup', handleDragEnd);
     carousel.addEventListener('dragstart', (e) => e.preventDefault());
-    cambiarImagen()
+    cambiarImagen() // llamamos a la funcion para que se actualice automaticamente cada que se recargue la pagina
     updateItemsPosition()
     return updateItemsPosition;
 
@@ -155,10 +193,8 @@ function createCarouselController2(carousel) {
             }
         });
 
-        console.log(currentIndex);
-        console.log((items[currentIndex]['children'][1]).name);
-        currentObject = currentIndex;
-        currentObjectName = (items[currentObject]['children'][1]).name;
+        currentObject = currentIndex; // asigna el valor de la imagen actual en este caso del objeto
+        currentObjectName = (items[currentObject]['children'][1]).name; // asigna el nombre de la imagen actual
     }
 
     function handleTouchStart(e) {
@@ -236,33 +272,62 @@ function createCarouselController2(carousel) {
 
 
 }
-
-
-function mostrarDatos() {
-
-    let Asnwer = nameOfPosition + currentObjectName;
-    if (CorrectAnswers.includes(Asnwer)) {
-        alert("Respuesta Correcta");
+///////////////////////////////////////////////////
+function mostrarDatos() { // funcion que muestra el manejo de los datos
+try {
+    let tituloModal = document.getElementById("exampleModalLabel");
+    let imagenEncontrada = document.getElementById(imagenAleatoria.nombre);
+    let Asnwer = imagenAleatoria.nombre + nameOfPosition + currentObjectName; // variable que representa la respuesta dada por el usuario
+    if (CorrectAnswers.includes(Asnwer)) { // condicional que muestra si la respuesta es correcta o no
+        sonidoCorrecto.play(); // Reproducir sonido correcto
+        tituloModal.textContent = "Respuesta Correcta!";
+        agregarRespuesta(Asnwer); // guardar la respuesta correcta cada vez que se encuentre en session storage
+        // Cambiar el contenido del <h1>
+        imagenes = imagenes.filter(item => item !== imagenAleatoria);
+        imagenEncontrada.style.display = "inline";
+        imagenAleatoria = imagenes[Math.floor(Math.random() * imagenes.length)]; // seleccion de una posicion 
+        console.log(imagenes);
+        cambiarImagen();
     } else {
-        alert("Respuesta Incorrecta");
+        sonidoIncorrecto.play(); // Reproducir sonido de nivel superado
+        tituloModal.textContent = "Respuesta Incorrecta!";
+    }
+} catch (error) {
+    let tituloModal = document.getElementById("exampleModalLabel");
+    tituloModal.textContent = "Nivel Superado!";
+    sonidoSuperado.play();
+    return;
+}
+
+}
+
+// 2. Función para agregar una nueva respuesta
+function agregarRespuesta(respuesta) {
+
+    if (!(respuestas.includes(respuesta))) {
+        // Agregar la nueva respuesta al array
+        respuestas.push(respuesta);
+        contador++;
+        // Guardar el array actualizado en localStorage
+        localStorage.setItem("respuestas", JSON.stringify(respuestas));
+        localStorage.setItem("contador", contador);
+        console.log("Respuestas actuales:", respuestas + ' contador: ' + contador);
+    } else {
+        return; // si la respuesta ya esta retorna nada
     }
 
 }
 
-function cambiarImagen() {
-    // Array con las posibles imágenes
-    
+function borrarLocalStorage() {
+    // Borra todos los datos del localStorage
+    localStorage.clear();
+    console.log("LocalStorage borrado.");
+}
 
-    let imagenes = ["/images/animales/aveCelular.png", "/images/animales/gatoCelular.png",
-        "/images/animales/osoCelular.png", "/images/animales/ranaCelular.png", "/images/animales/ratonCelular.png"
-    ];
-    // Elegimos una imagen aleatoria
-    let imagenAleatoria = imagenes[Math.floor(Math.random() * imagenes.length)];
-
+function cambiarImagen() { // funcion para cambiar de imagen cada que se recargue la pagina
     // Asignamos el src a la imagen
-    document.getElementById("imageToFoud").setAttribute("src", imagenAleatoria);
-    let src = document.getElementById("imageToFoud").src;
-    console.log(src)
+    document.getElementById("imageName").setAttribute("name", imagenAleatoria.nombre); // asigna la el nombre de la imagen que se debe encontrar
+    document.getElementById("imageToFoud").setAttribute("src", imagenAleatoria.src); // asigna el src de la imagen que se debe encontrar
 }
 
 
@@ -271,19 +336,5 @@ const carousel1 = document.querySelectorAll('.carousel1');
 const carousel2 = document.querySelectorAll('.carousel2');
 const updateFunctions1 = Array.from(carousel1).map(createCarouselController1);
 const updateFunctions2 = Array.from(carousel2).map(createCarouselController2);
-
-// Manejar cambios de tamaño
-window.addEventListener('resize', () => {
-    updateFunctions.forEach(update => update());
-});
-
-window.addEventListener('orientationchange', () => {
-    updateFunctions.forEach(update => update());
-});
-
-
-// Apartado 1 tablero 1
-
-
 
 
