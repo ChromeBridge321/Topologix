@@ -2,6 +2,7 @@ let currentPosition; // variable que muestra la posicion actual de la imagen act
 let nameOfPosition;// variable que muestra el nombre asignado a la posicion actual de imagen
 let currentObject;// variable que muestra la posicion del la imagen objeto
 let currentObjectName; // variable que muestra el nombre del la imagen objeto actual
+
 //obejtos que contendran propiedades que se utilizaran en la ejecucion de algunas funciones
 const ave = {
     nombre: "ave",
@@ -33,7 +34,7 @@ const raton = {
 
 let imagenes = [gato, ave, oso, rana, raton]; // varibale que guarda a los obejetos
 let imagenAleatoria = imagenes[Math.floor(Math.random() * imagenes.length)]; // seleccion de una posicion aleatoria del array imagenes
-let CorrectAnswers = ['aveArribaPiedra', 'osoArribaCasa', 'ranaDentroCasa', 'gatoAtrasHongo', 'ratonDentroValde']
+let CorrectAnswers = ['aveArribaArbol', 'osoFrenteCasa', 'ranaAtrasValde', 'gatoAbajoArbol', 'ratonArribaPiedra']
 let respuestas = JSON.parse(localStorage.getItem("respuestas")) || []; // array para guardar las respuestas correctas
 let contador = parseInt(localStorage.getItem("contador")) || 0; // determinara si ya se han alcanzado todas las respuestas
 // Reproducir el sonido correspondiente
@@ -156,7 +157,6 @@ function createCarouselController1(carousel) {
     carousel.addEventListener('dragstart', (e) => e.preventDefault());
     cambiarImagen() // llamamos a la funcion para que se actualice automaticamente cada que se recargue la pagina
     updateItemsPosition()
-    
     return updateItemsPosition;
 
 
@@ -306,7 +306,7 @@ try {
     let tituloModal = document.getElementById("exampleModalLabel");
     let siguienteNivel  = document.getElementById("NextLevel");
     siguienteNivel.style.display="inline";
-    tituloModal.textContent = "¡Felicidades! Has completado el nivel. 🎉🎊🎉";
+    tituloModal.textContent = "¡Felicidades! Has completado todos los niveles. 🎉🎊🎉";
     sonidoSuperado.play();
     return;
 }
