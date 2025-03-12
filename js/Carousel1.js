@@ -40,8 +40,6 @@ let contador = parseInt(localStorage.getItem("contador")) || 0; // determinara s
 const sonidoCorrecto = document.getElementById("sonidoCorrecto");
 const sonidoIncorrecto = document.getElementById("sonidoIncorrecto");
 const sonidoSuperado = document.getElementById("sonidoSuperado");
-const SonidoFondo = document.getElementById("BackgroudSound");
-SonidoFondo.loop = true;
 sonidoCorrecto.volume = 0.4;
 sonidoIncorrecto.volume = 0.2;
 sonidoSuperado.volume = 0.2;
@@ -338,8 +336,6 @@ function borrarLocalStorage() {
 
 function cambiarImagen() { // funcion para cambiar de imagen cada que se recargue la pagina
     // Asignamos el src a la imagen
-    SonidoFondo.volume = 0.2;
-    SonidoFondo.play();
     document.getElementById("imageName").setAttribute("name", imagenAleatoria.nombre); // asigna la el nombre de la imagen que se debe encontrar
     document.getElementById("imageToFoud").setAttribute("src", imagenAleatoria.src); // asigna el src de la imagen que se debe encontrar
 }
