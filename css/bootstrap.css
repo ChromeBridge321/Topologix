@@ -226,8 +226,65 @@ body {
 .bgOlivaDark {
   background-color: #1F271B;
 }
+.tablero {
+  background-color: #01787E;
+  border-radius: 15px;
+  padding: 15px;
+  width: 500px;
+  height: 500px;
+}
 
+.fila {
+  display: flex;
+  margin-bottom: 10px;
+  justify-content: space-around;
+}
 
+.celda {
+  width: 60px;
+  height: 60px;
+  margin: 5px;
+  border-radius: 8px;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.celda-objeto {
+  width: 60px;
+  height: 60px;
+  margin: 5px;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px dashed #adb5bd;
+}
+
+.celda-lateral {
+  width: 60px;
+  height: 60px;
+  margin: 5px;
+  border-radius: 8px;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.imagen-placeholder {
+  width: 40px;
+  height: 40px;
+  background-color: #ffc107;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+}
 hr {
   margin: 1rem 0;
   color: inherit;

@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/css.css">
     <title>Document</title>
 </head>
+
 <body class=" bgOlivaDark d-md-flex justify-content-md-center justify-content-md-end">
 
     <div class="container-fluid">
@@ -18,7 +19,7 @@
                 <h1 class=" text-white fw-bolder">TOPOLOGIX</h1>
             </div>
 
-            <div class=" row bgCianLight d-flex justify-content-center">
+            <div class=" row bgCianLight d-flex justify-content-center pb-md-4 pt-md-4">
 
                 <div class="col-12 col-md-6 mt-3 d-flex justify-content-center mt-md-2 m-md-0">
                     <img class="img-fluid rounded-4" src="/images/tableros/Nivel1.svg" alt="">
@@ -27,15 +28,15 @@
                 <div class="row w-100 w-100 mt-2 d-flex justify-content- d-md-none">
                     <div
                         class="col-10 mt-2 mb-2 bgWoodLight rounded-3 d-flex justify-content-around align-items-center border-secondary border-3 border">
-                        <img id="ave" class="img-fluid" src="/images/animales/aveCelular.png"
+                        <img id="ave" class="img-fluid ave" src="/images/animales/aveCelular.png"
                             style="height: 40px; display: none;">
-                        <img id="gato" class="img-fluid" src="/images/animales/gatoCelular.png"
+                        <img id="gato" class="img-fluid gato" src="/images/animales/gatoCelular.png"
                             style="height: 40px; display: none;">
-                        <img id="oso" class="img-fluid" src="/images/animales/osoCelular.png"
+                        <img id="oso" class="img-fluid oso" src="/images/animales/osoCelular.png"
                             style="height: 40px; display: none;">
-                        <img id="rana" class="img-fluid" src="/images/animales/ranaCelular.png"
+                        <img id="rana" class="img-fluid rana" src="/images/animales/ranaCelular.png"
                             style="height: 40px; display: none;">
-                        <img id="raton" class="img-fluid" src="/images/animales/ratonCelular.png"
+                        <img id="raton" class="img-fluid raton" src="/images/animales/ratonCelular.png"
                             style="height: 40px; display: none;">
                     </div>
                     <div class="col-2">
@@ -104,43 +105,144 @@
                         </div>
 
                         <div class=" col-12 mt-3">
-                            <button onclick="mostrarDatos()" type="button" class="w-100 btn btn-primary btn-lg"
+                            <button type="button" onclick="mostrarDatos() " class="w-100 btn btn-primary btn-lg click"
                                 data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 Verificar
                             </button>
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-6 d-none col-md-6 d-md-flex justify-content-center align-items-center">
+                    <div class="tablero">
+                        <!-- Fila superior con objetos -->
+                        <div class="fila">
+                            <div class="celda-lateral">
+                                <div class="imagen-placeholder"></div>
+                            </div>
+                            <div class="celda-lateral">
+                                <div class="imagen-placeholder"><img src="/images/Disposiciones/arriba_computadora.png"
+                                        alt="" style="height: 80px; width: 80px;"></div>
+                            </div>
+                            <div class="celda-lateral">
+                                <div class="imagen-placeholder"><img src="/images/Disposiciones/abajo_computadora.png"
+                                        alt="" style="height: 80px; width: 80px;"></div>
+                            </div>
+                            <div class="celda-lateral">
+                                <div class="imagen-placeholder"><img src="/images/Disposiciones/frente_computadora.png"
+                                        alt="" style="height: 80px; width: 80px;"></div>
+                            </div>
+                            <div class="celda-lateral">
+                                <div class="imagen-placeholder"><img src="/images/Disposiciones/atras_computadora.png"
+                                        alt="" style="height: 80px; width: 80px;"></div>
+                            </div>
+                            <div class="celda-lateral">
+                                <div class="imagen-placeholder"><img src="/images/Disposiciones/dentro_computadora.png"
+                                        alt="" style="height: 80px; width: 80px;"></div>
+                            </div>
+                        </div>
 
-                            <!-- Modal -->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                                aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered6">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body d-flex justify-content-center align-items-center">
-                                            <img id="celebration" src="" alt="" class="img-fluid" style="display: none; height: 200px;  width: 200px;">
-                                            <audio id="sonidoCorrecto" src="/sounds/correct.mp3"></audio>
-                                            <audio id="sonidoIncorrecto" src="sounds/error.mp3"></audio>
-                                            <audio id="sonidoSuperado"
-                                                src="sounds/kids-saying-yay-sound-effect_xryiS4g.mp3"></audio>
-                                                
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Cerrar</button>
-                                            <a id="NextLevel" href="/index2.html" class="btn btn-primary" style="display: none;">Siguiente
-                                                nivel</a>
-                                        </div>
-                                    </div>
-                                </div>
+                        <!-- Fila 1 -->
+                        <div class="fila">
+                            <div class="celda-lateral">
+                                <div class="imagen-placeholder"><img src="/images/lugares/piedra_computadora.png" alt=""
+                                        style="height: 80px; width: 80px;"></div>
+                            </div>
+                            <div class="celda click  ave"><img id="ave" class="img-fluid rounded-5 ave"
+                                    src="/images/animales/aveCelular.png" style="height: 50px; display: none;"></div>
+                            <div class="celda click "></div>
+                            <div class="celda click "></div>
+                            <div class="celda click "></div>
+                            <div class="celda click "></div>
+                        </div>
+
+                        <!-- Fila 2 -->
+                        <div class="fila">
+                            <div class="celda-lateral">
+                                <div class="imagen-placeholder"><img src="/images/lugares/arbol_computadora.png" alt=""
+                                        style="height: 80px; width: 80px;"></div>
+                            </div>
+                            <div class="celda click "></div>
+                            <div class="celda click "></div>
+                            <div class="celda click "></div>
+                            <div class="celda click "></div>
+                            <div class="celda click "></div>
+                        </div>
+
+                        <!-- Fila 3 -->
+                        <div class="fila">
+                            <div class="celda-lateral">
+                                <div class="imagen-placeholder"><img src="/images/lugares/casa_computadora.png" alt=""
+                                        style="height: 80px; width: 80px;"></div>
+                            </div>
+                            <div class="celda click  oso"> <img id="oso" class="img-fluid rounded-5 oso"
+                                    src="/images/animales/osoCelular.png" style="height: 50px; display: none;"></div>
+                            <div class="celda click "></div>
+                            <div class="celda click "></div>
+                            <div class="celda click "></div>
+                            <div class="celda click  rana"> <img id="rana" class="img-fluid rounded-5 rana"
+                                    src="/images/animales/ranaCelular.png" style="height: 50px; display: none;"></div>
+                        </div>
+
+                        <!-- Fila 4 -->
+                        <div class="fila">
+                            <div class="celda-lateral">
+                                <div class="imagen-placeholder"><img src="/images/lugares/valde_computadora.png" alt=""
+                                        style="height: 80px; width: 80px;"></div>
+                            </div>
+                            <div class="celda click "></div>
+                            <div class="celda click "></div>
+                            <div class="celda click "></div>
+                            <div class="celda click "></div>
+                            <div class="celda click  raton"> <img id="raton" class="img-fluid rounded-5 raton"
+                                    src="/images/animales/ratonCelular.png" style="height: 50px; display: none;">
+                            </div>
+                        </div>
+
+                        <!-- Fila 5 -->
+                        <div class="fila">
+                            <div class="celda-lateral">
+                                <div class="imagen-placeholder"><img src="/images/lugares/hongo_computadora.png" alt=""
+                                        style="height: 80px; width: 80px;"></div>
+                            </div>
+                            <div class="celda click "></div>
+                            <div class="celda click "></div>
+                            <div class="celda click "></div>
+                            <div class="celda click  gato">
+                                <img id="gato" class="img-fluid rounded-5 gato" src="/images/animales/gatoCelular.png"
+                                    style="height: 50px; display: none;">
+                            </div>
+                            <div class="celda click ">
+
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
 
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog modal-dialog-centered6">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body d-flex justify-content-center align-items-center">
+                    <img id="celebration" src="" alt="" class="img-fluid"
+                        style="display: none; height: 200px;  width: 200px;">
+                    <audio id="sonidoCorrecto" src="/sounds/correct.mp3"></audio>
+                    <audio id="sonidoIncorrecto" src="sounds/error.mp3"></audio>
+                    <audio id="sonidoSuperado" src="sounds/kids-saying-yay-sound-effect_xryiS4g.mp3"></audio>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <a id="NextLevel" href="/index2.html" class="btn btn-primary" style="display: none;">Siguiente
+                        nivel</a>
+                </div>
             </div>
         </div>
     </div>
