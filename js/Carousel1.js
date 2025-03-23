@@ -360,7 +360,7 @@ function mostrarDatosTablero(event) {
             imgCelebration.style.display = "inline";
             imgCelebration.setAttribute("src", "images/tableros/bduck-duck.gif");
             tituloModal.textContent = "Lo siento, esa no es la respuesta correcta.";
-           //alert("Lo siento, esa no es la respuesta correcta.");
+            //alert("Lo siento, esa no es la respuesta correcta.");
         }
     } catch (error) {
         siguienteNivel = document.getElementById("NextLevel");
@@ -378,3 +378,128 @@ const carousel1 = document.querySelectorAll('.carousel1');
 const carousel2 = document.querySelectorAll('.carousel2');
 const updateFunctions1 = Array.from(carousel1).map(createCarouselController1);
 const updateFunctions2 = Array.from(carousel2).map(createCarouselController2);
+
+const main = document.getElementById("main");
+const tablero = document.getElementById("Tablero");
+const contenedor1 = document.getElementById("contenedor-1");
+const contenedor2 = document.getElementById("contenedor-2");
+const imagenLateral = document.querySelectorAll(".imagenLateral");
+const filas = document.querySelectorAll(".fila");
+const celdaLateral = document.querySelectorAll(".celda-lateral");
+
+
+
+function ajustarTablero() {
+    // Obtener el ancho y alto de la ventana
+    const anchoPantalla = window.innerWidth;
+    const altoPantalla = window.innerHeight;
+
+
+    if (anchoPantalla >= 720) {
+        tablero.style.height = "400px";  //40
+        tablero.style.width = "400px";
+        
+        imagenLateral.forEach(celda => {
+            celda.style.width = "40px";
+            celda.style.height = "40px";
+        });
+
+        celdas.forEach(celda => {
+            celda.classList.add("celda1");
+            celda.classList.remove("celda2");
+            celda.classList.remove("celda3");
+        });
+
+                filas.forEach(fila => {
+            fila.classList.add("fila1");
+            fila.classList.remove("fila2");
+            fila.classList.remove("fila3");
+        });
+
+        celdaLateral.forEach(celda => {
+            celda.classList.add("celda-lateral1");
+            celda.classList.remove("celda-lateral2");
+            celda.classList.remove("celda-lateral3");
+        });
+
+    }
+
+
+    if (anchoPantalla >= 1160) {
+        tablero.style.height = "500px"; //60
+        tablero.style.width = "500px";
+
+
+        celdas.forEach(celda => {
+            celda.classList.add("celda2");
+            celda.classList.remove("celda1");
+            celda.classList.remove("celda3");
+        });
+
+                filas.forEach(fila => {
+            fila.classList.add("fila2");
+            fila.classList.remove("fila1");
+            fila.classList.remove("fila3");
+        });
+
+        celdaLateral.forEach(celda => {
+            celda.classList.add("celda-lateral2");
+            celda.classList.remove("celda-lateral1");
+            celda.classList.remove("celda-lateral3");
+        });
+
+        imagenLateral.forEach(celda => {
+            celda.style.height = "60px";
+            celda.style.width = "60px";
+        });
+
+    }
+
+    if (anchoPantalla >= 1320) {
+        tablero.style.height = "600px"; //80
+        tablero.style.width = "600px";
+        celdas.forEach(celda => {
+            celda.classList.add("celda3");
+            celda.classList.remove("celda2");
+            celda.classList.remove("celda1");
+        });
+
+        filas.forEach(fila => {
+            fila.classList.add("fila3");
+            fila.classList.remove("fila2");
+            fila.classList.remove("fila1");
+        });
+
+        celdaLateral.forEach(celda => {
+            celda.classList.add("celda-lateral3");
+            celda.classList.remove("celda-lateral2");
+            celda.classList.remove("celda-lateral1");
+        });
+
+        imagenLateral.forEach(celda => {
+            celda.style.height = "80px";
+            celda.style.width = "80px";
+        });
+
+
+
+
+    }
+
+    if (anchoPantalla > altoPantalla) {
+        main.style.display = "flex";
+        contenedor1.classList.add("col-md-6");
+        contenedor2.classList.add("col-md-6");
+    } else {
+        main.style.display = "block";
+        contenedor1.classList.add("col-md-12");
+        contenedor2.classList.add("col-md-12");
+        contenedor2.classList.add("pt-5");
+    }
+}
+
+// Ajustar el tablero al cargar la página
+ajustarTablero();
+
+// Ajustar el tablero cuando se redimensiona la ventana
+window.addEventListener('resize', ajustarTablero);

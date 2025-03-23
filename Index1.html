@@ -13,19 +13,20 @@
 
     <div class="container-fluid">
 
-        <div class="row d-flex justify-content-center">
+        <div class="row d-flex justify-content-center" style="height: 100vh;">
 
             <div class="col-12 d-flex justify-content-center">
-                <h1 class=" text-white fw-bolder">TOPOLOGIX</h1>
+                <h1 class=" text-white fw-bolder align-items-center justify-content-center d-flex">TOPOLOGIX</h1>
             </div>
 
-            <div class=" row bgCianLight d-flex justify-content-center pb-md-4 pt-md-4">
+            <div class="d-flex justify-content-center row bgCianLight pb-md-4 pt-md-4" id="main">
 
-                <div class="col-12 col-md-6 mt-3 d-flex justify-content-center mt-md-2 m-md-0">
+                <div class="mt-3 d-flex justify-content-center mt-md-2 m-md-0" id="contenedor-1">
+                    <!-- Fila superior con objetos --><!-- Fila superior con objetos -->
                     <img class="img-fluid rounded-4" src="/images/tableros/Nivel1.svg" alt="">
                 </div>
 
-                <div class="row w-100 w-100 mt-2 d-flex justify-content- d-md-none">
+                <div class="row w-100 w-100 mt-2 d-flex justify-content-center d-md-none ps-1 pe-1">
                     <div
                         class="col-10 mt-2 mb-2 bgWoodLight rounded-3 d-flex justify-content-around align-items-center border-secondary border-3 border">
                         <img id="ave" class="img-fluid ave" src="/images/animales/aveCelular.png"
@@ -39,7 +40,7 @@
                         <img id="raton" class="img-fluid raton" src="/images/animales/ratonCelular.png"
                             style="height: 40px; display: none;">
                     </div>
-                    <div class="col-2">
+                    <div class="col-2 d-flex justify-content-end">
                         <div class="row m-0 mt-2 mb-2 bgWoodLight  border border-3 border-secondary rounded-3 d-flex justify-content-center align-items-center"
                             style="width: 50px; height: 50px;">
                             <img class="img-fluid p-0 " src="" alt="" id="imageToFoud1"
@@ -106,52 +107,52 @@
 
                         <div class=" col-12 mt-3">
                             <div type="div" onclick="mostrarDatos()" class="w-100 btn btn-primary btn-lg"
-                                >
+                                data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 Verificar
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class=" col-6 d-none col-md-6 d-md-flex justify-content-center align-items-center">
-                    <div class="tablero">
+                <div class="d-none d-md-flex justify-content-center align-items-center" id="contenedor-2">
+                    <!-- Fila superior con objetos --><!-- Fila superior con objetos -->
+                    <div class="tablero" id="Tablero">
                         <!-- Fila superior con objetos -->
                         <div class="fila">
                             <div class="celda-lateral">
                                 <div class="imagen-placeholder">
-                                    <img class="p-0 rounded-5" src="" alt="" 
-                                    style="height: 60px; width: 60px;" id="imageToFoud2">
-                                <input type="text" class=" d-none" name="" id="imageName2">
+                                    <img class="p-0 rounded-5 imagenLateral" src="" alt="" id="imageToFoud2">
+                                    <input type="text" class=" d-none" name="" id="imageName2">
                                 </div>
                             </div>
                             <div class="celda-lateral">
-                                <div class="imagen-placeholder"><img src="/images/Disposiciones/arriba_computadora.png"
-                                        alt="" style="height: 70px; width: 70px;"></div>
+                                <div class="imagen-placeholder"><img class="imagenLateral"
+                                        src="/images/Disposiciones/arriba_computadora.png"></div>
                             </div>
                             <div class="celda-lateral">
-                                <div class="imagen-placeholder"><img src="/images/Disposiciones/abajo_computadora.png"
-                                        alt="" style="height: 70px; width: 70px;"></div>
+                                <div class="imagen-placeholder"><img class="imagenLateral"
+                                        src="/images/Disposiciones/abajo_computadora.png"></div>
                             </div>
                             <div class="celda-lateral">
-                                <div class="imagen-placeholder"><img src="/images/Disposiciones/frente_computadora.png"
-                                        alt="" style="height: 70px; width: 70px;"></div>
+                                <div class="imagen-placeholder"><img class="imagenLateral"
+                                        src="/images/Disposiciones/frente_computadora.png"></div>
                             </div>
                             <div class="celda-lateral">
-                                <div class="imagen-placeholder"><img src="/images/Disposiciones/atras_computadora.png"
-                                        alt="" style="height: 70px; width: 70px;"></div>
+                                <div class="imagen-placeholder"><img class="imagenLateral"
+                                        src="/images/Disposiciones/atras_computadora.png"></div>
                             </div>
                             <div class="celda-lateral">
-                                <div class="imagen-placeholder"><img src="/images/Disposiciones/dentro_computadora.png"
-                                        alt="" style="height: 70px; width: 70px;"></div>
+                                <div class="imagen-placeholder"><img class="imagenLateral"
+                                        src="/images/Disposiciones/dentro_computadora.png"></div>
                             </div>
                         </div>
 
                         <!-- Fila 1 -->
                         <div class="fila">
                             <div class="celda-lateral">
-                                <div class="imagen-placeholder"><img src="/images/lugares/piedra_computadora.png" alt=""
-                                        style="height: 70px; width: 70px;"></div>
+                                <div class="imagen-placeholder"><img class="imagenLateral"
+                                        src="/images/lugares/piedra_computadora.png" alt=""></div>
                             </div>
-                            <div class="celda ave" ><img id="ave" class="img-fluid rounded-5 ave"
+                            <div class="celda ave"><img id="ave" class="img-fluid rounded-5 ave"
                                     src="/images/animales/aveCelular.png" style="height: 50px; display: none;"></div>
                             <div class="celda"></div>
                             <div class="celda"></div>
@@ -162,8 +163,8 @@
                         <!-- Fila 2 -->
                         <div class="fila">
                             <div class="celda-lateral">
-                                <div class="imagen-placeholder"><img src="/images/lugares/arbol_computadora.png" alt=""
-                                        style="height: 70px; width: 70px;"></div>
+                                <div class="imagen-placeholder"><img class="imagenLateral"
+                                        src="/images/lugares/arbol_computadora.png" alt=""></div>
                             </div>
                             <div class="celda"></div>
                             <div class="celda"></div>
@@ -175,29 +176,29 @@
                         <!-- Fila 3 -->
                         <div class="fila">
                             <div class="celda-lateral">
-                                <div class="imagen-placeholder"><img src="/images/lugares/casa_computadora.png" alt=""
-                                        style="height: 70px; width: 70px;"></div>
+                                <div class="imagen-placeholder"><img class="imagenLateral"
+                                        src="/images/lugares/casa_computadora.png" alt=""></div>
                             </div>
-                            <div class="celda  oso" > <img id="oso" class="img-fluid rounded-5 oso"
+                            <div class="celda  oso"> <img id="oso" class="img-fluid rounded-5 oso"
                                     src="/images/animales/osoCelular.png" style="height: 50px; display: none;"></div>
                             <div class="celda"></div>
                             <div class="celda"></div>
                             <div class="celda"></div>
-                            <div class="celda rana" > <img id="rana" class="img-fluid rounded-5 rana"
+                            <div class="celda rana"> <img id="rana" class="img-fluid rounded-5 rana"
                                     src="/images/animales/ranaCelular.png" style="height: 50px; display: none;"></div>
                         </div>
 
                         <!-- Fila 4 -->
                         <div class="fila">
                             <div class="celda-lateral">
-                                <div class="imagen-placeholder"><img src="/images/lugares/valde_computadora.png" alt=""
-                                        style="height: 70px; width: 70px;"></div>
+                                <div class="imagen-placeholder"><img class="imagenLateral"
+                                        src="/images/lugares/valde_computadora.png" alt=""></div>
                             </div>
                             <div class="celda"></div>
                             <div class="celda"></div>
                             <div class="celda"></div>
                             <div class="celda"></div>
-                            <div class="celda raton" > <img id="raton" class="img-fluid rounded-5 raton"
+                            <div class="celda raton"> <img id="raton" class="img-fluid rounded-5 raton"
                                     src="/images/animales/ratonCelular.png" style="height: 50px; display: none;">
                             </div>
                         </div>
@@ -205,13 +206,13 @@
                         <!-- Fila 5 -->
                         <div class="fila">
                             <div class="celda-lateral">
-                                <div class="imagen-placeholder"><img src="/images/lugares/hongo_computadora.png" alt=""
-                                        style="height: 70px; width: 70px;"></div>
+                                <div class="imagen-placeholder"><img class="imagenLateral"
+                                        src="/images/lugares/hongo_computadora.png" alt=""></div>
                             </div>
                             <div class="celda"></div>
                             <div class="celda"></div>
                             <div class="celda"></div>
-                            <div class="celda gato" >
+                            <div class="celda gato">
                                 <img id="gato" class="img-fluid rounded-5 gato" src="/images/animales/gatoCelular.png"
                                     style="height: 50px; display: none;">
                             </div>
