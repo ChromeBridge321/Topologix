@@ -34,8 +34,6 @@ const raton = {
 let imagenes = [gato, ave, oso, rana, raton]; // varibale que guarda a los obejetos
 let imagenAleatoria = imagenes[Math.floor(Math.random() * imagenes.length)]; // seleccion de una posicion aleatoria del array imagenes
 let CorrectAnswers = ['aveArribaPiedra', 'osoArribaCasa', 'ranaDentroCasa', 'gatoAtrasHongo', 'ratonDentroValde']
-let respuestas = JSON.parse(localStorage.getItem("respuestas")) || []; // array para guardar las respuestas correctas
-let contador = parseInt(localStorage.getItem("contador")) || 0; // determinara si ya se han alcanzado todas las respuestas
 // Reproducir el sonido correspondiente
 const sonidoCorrecto = document.getElementById("sonidoCorrecto");
 const sonidoIncorrecto = document.getElementById("sonidoIncorrecto");
@@ -43,7 +41,25 @@ const sonidoSuperado = document.getElementById("sonidoSuperado");
 sonidoCorrecto.volume = 0.4;
 sonidoIncorrecto.volume = 0.2;
 sonidoSuperado.volume = 0.2;
+let tituloModal = document.getElementById("exampleModalLabel");
+let imagenEncontrada = document.querySelectorAll(`.${imagenAleatoria.nombre}`);
+let Asnwer = imagenAleatoria.nombre + nameOfPosition + currentObjectName; // variable que representa la respuesta dada por el usuario
+let imgCelebration = document.getElementById("celebration");
+let siguienteNivel = document.getElementById("NextLevel");
 
+let ImageName1 = document.getElementById("imageName1");
+let ImageToFound1 = document.getElementById("imageToFoud1");
+let ImageName2 = document.getElementById("imageName2");
+let ImageToFound2 = document.getElementById("imageToFoud2");
+
+const celdas = document.querySelectorAll('.celda');
+
+// Agrega el event listener a cada celda
+celdas.forEach(celda => {
+    celda.addEventListener('click', mostrarDatosTablero);
+    celda.setAttribute('data-bs-toggle', 'modal');
+    celda.setAttribute('data-bs-target', '#exampleModal');
+});
 // Función para crear un controlador de carrusel
 // funciones que manejan las animaciones y traslacion de los carruseles por separado
 function createCarouselController1(carousel) {
@@ -275,27 +291,21 @@ function createCarouselController2(carousel) {
 
 }
 ///////////////////////////////////////////////////
-console.log('valor:' + imagenAleatoria.nombre);
-// Selecciona todos los elementos con la clase "celda"
-const celdas = document.querySelectorAll('.celda');
-// Agrega el event listener a cada celda
-celdas.forEach(celda => {
-    celda.addEventListener('click', manejarClick);
-});
 function mostrarDatos() { // funcion que muestra el manejo de los datos
-    //try {
-        console.log('valor en funcion mostrar:' + imagenAleatoria.nombre);
-        let tituloModal = document.getElementById("exampleModalLabel");
-        let imagenEncontrada = document.querySelectorAll(`.${imagenAleatoria.nombre}`);
-        let Asnwer = imagenAleatoria.nombre + nameOfPosition + currentObjectName; // variable que representa la respuesta dada por el usuario
-        let imgCelebration = document.getElementById("celebration");
-
+    try {
+        tituloModal = document.getElementById("exampleModalLabel");
+        imagenEncontrada = document.querySelectorAll(`.${imagenAleatoria.nombre}`);
+        Asnwer = imagenAleatoria.nombre + nameOfPosition + currentObjectName; // variable que representa la respuesta dada por el usuario
+        imgCelebration = document.getElementById("celebration");
         if (CorrectAnswers.includes(Asnwer)) { // condicional que muestra si la respuesta es correcta o no
             sonidoCorrecto.play(); // Reproducir sonido correcto
-            tituloModal.textContent = "¡Felicidades! Has respondido correctamente.";
-            // Cambiar el contenido del <h1>
+            tituloModal.textContent = "¡Felicidades! Has respondido correctamente. ";
             imagenes = imagenes.filter(item => item !== imagenAleatoria);
-            FunctionImagenEncontrada(imagenEncontrada);
+            imagenEncontrada.forEach(elemento => {
+                if (elemento.style.display === 'none') {
+                    elemento.style.display = 'block'; // Cambia a 'block' o el valor que necesites
+                }
+            });
             imgCelebration.style.display = "inline";
             imgCelebration.setAttribute("src", "images/tableros/gif-animado-celebrar-cumple.gif");
             imagenAleatoria = imagenes[Math.floor(Math.random() * imagenes.length)]; // seleccion de una posicion 
@@ -306,42 +316,58 @@ function mostrarDatos() { // funcion que muestra el manejo de los datos
             imgCelebration.setAttribute("src", "images/tableros/bduck-duck.gif");
             tituloModal.textContent = "Lo siento, esa no es la respuesta correcta.";
         }
-    /*} catch (error) {
-        let tituloModal = document.getElementById("exampleModalLabel"); let siguienteNivel = document.getElementById("NextLevel"); siguienteNivel.style.display = "inline"; tituloModal.textContent = "¡Felicidades! Has completado el nivel. 🎉🎊🎉";
+    } catch (error) {
+        siguienteNivel = document.getElementById("NextLevel");
+        siguienteNivel.style.display = "inline";
+        tituloModal.textContent = "¡Felicidades! Has completado el nivel. 🎉🎊🎉";
         sonidoSuperado.play();
         return;
-    }*/
-
+    }
 }
 
 function cambiarImagen() { // funcion para cambiar de imagen cada que se recargue la pagina
-    // Asignamos el src a la imagen
-    document.getElementById("imageName").setAttribute("name", imagenAleatoria.nombre); // asigna la el nombre de la imagen que se debe encontrar
-    document.getElementById("imageToFoud").setAttribute("src", imagenAleatoria.src); // asigna el src de la imagen que se debe encontrar
-}
-function FunctionImagenEncontrada(imagenEncontrada) {
-    imagenEncontrada.forEach(elemento => {
-        if (elemento.style.display === 'none') {
-            elemento.style.display = 'block'; // Cambia a 'block' o el valor que necesites
-        }
-    });
-}
-// Función que se ejecuta al hacer clic
-function manejarClick(event) {
-    // Obtiene el elemento sobre el que se hizo clic
-    console.log('valor en funcion click:' + imagenAleatoria.nombre);
-    const elemento = event.target;
+    document.getElementById("imageName1").setAttribute("name", imagenAleatoria.nombre);
+    document.getElementById("imageToFoud1").setAttribute("src", imagenAleatoria.src);
+    document.getElementById("imageName2").setAttribute("name", imagenAleatoria.nombre);
+    document.getElementById("imageToFoud2").setAttribute("src", imagenAleatoria.src);
 
-    // Verifica si el elemento tiene la clase "celda"
-    if (elemento.classList.contains('celda')) {
-        // Verifica si también tiene la clase "animal"
-        if (elemento.classList.contains(imagenAleatoria.nombre)) {
-            alert("Este es un animal en una celda.");
-            FunctionImagenEncontrada();
+}
 
+
+function mostrarDatosTablero(event) {
+    try {
+        tituloModal = document.getElementById("exampleModalLabel");
+        // Obtiene el elemento sobre el que se hizo clic
+        let elemento = event.target;
+        imagenEncontrada = document.querySelectorAll(`.${imagenAleatoria.nombre}`);
+        // Verifica si el elemento tiene la clase "celda"
+        if ((elemento.classList.contains('celda')) && (elemento.classList.contains(imagenAleatoria.nombre))) {
+            sonidoCorrecto.play(); // Reproducir sonido correcto
+            imgCelebration.style.display = "inline";
+            imgCelebration.setAttribute("src", "images/tableros/gif-animado-celebrar-cumple.gif");
+            tituloModal.textContent = "¡Felicidades! Has respondido correctamente. ";
+            //alert("¡Felicidades! Has respondido correctamente. ");
+            imagenes = imagenes.filter(item => item !== imagenAleatoria);
+            imagenAleatoria = imagenes[Math.floor(Math.random() * imagenes.length)];
+            imagenEncontrada.forEach(elemento => {
+                if (elemento.style.display === 'none') {
+                    elemento.style.display = 'block'; // Cambia a 'block' o el valor que necesites
+                }
+            });
+            cambiarImagen();
         } else {
-            alert("Este es una celda.");
+            sonidoIncorrecto.play(); // Reproducir sonido de nivel superado
+            imgCelebration.style.display = "inline";
+            imgCelebration.setAttribute("src", "images/tableros/bduck-duck.gif");
+            tituloModal.textContent = "Lo siento, esa no es la respuesta correcta.";
+           //alert("Lo siento, esa no es la respuesta correcta.");
         }
+    } catch (error) {
+        siguienteNivel = document.getElementById("NextLevel");
+        siguienteNivel.style.display = "inline";
+        tituloModal.textContent = "¡Felicidades! Has completado el nivel. 🎉🎊🎉";
+        sonidoSuperado.play();
+        return;
     }
 }
 
@@ -352,5 +378,3 @@ const carousel1 = document.querySelectorAll('.carousel1');
 const carousel2 = document.querySelectorAll('.carousel2');
 const updateFunctions1 = Array.from(carousel1).map(createCarouselController1);
 const updateFunctions2 = Array.from(carousel2).map(createCarouselController2);
-
-
