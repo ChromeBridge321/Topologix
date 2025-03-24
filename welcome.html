@@ -1,11 +1,382 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Topologix - Juego Educativo para Niños</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0d8b8b;
+            --secondary: #ffc107;
+            --accent: #ff7f50;
+            --light: #f8f9fa;
+            --dark: #2a5555;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--light);
+            color: #333;
+        }
+        
+        .navbar {
+            background-color: var(--primary);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: white;
+        }
+        
+        .hero-section {
+            background-color: var(--primary);
+            color: white;
+            padding: 5rem 0;
+            border-radius: 0 0 2rem 2rem;
+        }
+        
+        .game-board-img {
+            border-radius: 1rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            max-width: 100%;
+        }
+        
+        .feature-card {
+            border-radius: 1rem;
+            border: none;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            height: 100%;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+        }
+        
+        .section-title {
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 0;
+            width: 5rem;
+            height: 4px;
+            background-color: var(--secondary);
+            border-radius: 2px;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--dark);
+            border-color: var(--dark);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+            border-color: var(--secondary);
+            color: #333;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #e0a800;
+            border-color: #e0a800;
+            color: #333;
+        }
+        
+        .how-to-play {
+            background-color: var(--light);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .step-box {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 1rem;
+            border-left: 5px solid var(--primary);
+        }
+        
+        .step-number {
+            background-color: var(--primary);
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+        
+        .gallery-img {
+            border-radius: 1rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            height: 400px;
+            width: 600px;
+        }
+        
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+        
+        .character-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin: 0 10px;
+            animation: bounce 2s infinite alternate;
+        }
+        
+        @keyframes bounce {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(-10px);
+            }
+        }
+        
+        .disclaimer {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 15px;
+            font-size: 0.9rem;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Pagina de Inicio</h1>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">TOPOLOGIX</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#inicio">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#sobre-el-juego">Sobre el juego</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#como-jugar">Cómo jugar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#galeria">Galería</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="inicio">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <h1 class="display-4 fw-bold mb-4">Topologix</h1>
+                    <h2 class="h3 mb-4">Un juego educativo para desarrollar habilidades espaciales</h2>
+                    <p class="lead mb-4">Ayuda a tus hijos a aprender conceptos de ubicación espacial de forma divertida con este entretenido juego de mesa.</p>
+                    <div class="d-flex gap-3">
+                        <a href="index1.html" class="btn btn-secondary btn-lg">Jugar ahora</a>
+                        <a href="#sobre-el-juego" class="btn btn-outline-light btn-lg">Más información</a>
+                    </div>
+                    <div class="disclaimer">
+                        <p class="mb-0"><small><strong>Aviso:</strong> Este es un proyecto escolar sin ánimo de lucro. Todas las imágenes y referencias al juego Topologix son utilizadas con fines educativos.</small></p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <img src="images/tableros/Nivel1.svg" alt="Tablero de Topologix" class="game-board-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-5 my-5" id="sobre-el-juego">
+        <div class="container">
+            <h2 class="section-title">¿Qué es Topologix?</h2>
+            <div class="row">
+                <div class="col-lg-8 mb-4">
+                    <p class="lead">Topologix es un juego educativo diseñado para niños de 4 a 7 años que les permite desarrollar habilidades espaciales y de ubicación de manera lúdica.</p>
+                    <p>El juego consiste en un tablero con una cuadrícula y varios elementos (animales y objetos) que deben ser ubicados según tarjetas de desafío que muestran pistas sobre su posición relativa.</p>
+                    <p>Con Topologix, los niños aprenden conceptos espaciales como:</p>
+                    <ul>
+                        <li>Arriba/abajo</li>
+                        <li>A la derecha/a la izquierda</li>
+                        <li>En la misma fila/columna</li>
+                        <li>Cerca/lejos</li>
+                    </ul>
+                    <p>El juego promueve el desarrollo del pensamiento lógico y espacial de forma divertida y atractiva para los niños.</p>
+                </div>
+                <div class="col-lg-4">
+                    <div class="d-flex justify-content-center">
+                        <img src="images/animales/aveComputadora.png" alt="Pájaro" class="character-icon">
+                        <img src="images/animales/osoComputadora.png" alt="Oso" class="character-icon">
+                        <img src="images/animales/ranaComputadora.png" alt="Rana" class="character-icon">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-md-4 mb-4">
+                    <div class="feature-card card p-4">
+                        <div class="text-center mb-3">
+                            <i class="fas fa-brain feature-icon"></i>
+                        </div>
+                        <h3 class="h5 text-center mb-3">Desarrollo Cognitivo</h3>
+                        <p>Estimula el razonamiento lógico, la percepción espacial y la capacidad de resolución de problemas en los niños.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-card card p-4">
+                        <div class="text-center mb-3">
+                            <i class="fas fa-graduation-cap feature-icon"></i>
+                        </div>
+                        <h3 class="h5 text-center mb-3">Aprendizaje Divertido</h3>
+                        <p>Permite a los niños aprender conceptos espaciales y de ubicación a través del juego y la experimentación.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-card card p-4">
+                        <div class="text-center mb-3">
+                            <i class="fas fa-users feature-icon"></i>
+                        </div>
+                        <h3 class="h5 text-center mb-3">Juego Cooperativo</h3>
+                        <p>Fomenta la interacción social y la comunicación entre los jugadores al resolver desafíos juntos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Play Section -->
+    <section class="py-5 bg-light" id="como-jugar">
+        <div class="container">
+            <h2 class="section-title">¿Cómo se juega?</h2>
+            <div class="row">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <div class="how-to-play">
+                        <div class="step-box d-flex align-items-start">
+                            <div class="step-number">1</div>
+                            <div>
+                                <h4 class="h5">Prepara el tablero</h4>
+                                <p>Coloca el tablero en el centro de la mesa y ten las fichas de animales y objetos a mano.</p>
+                            </div>
+                        </div>
+                        <div class="step-box d-flex align-items-start">
+                            <div class="step-number">2</div>
+                            <div>
+                                <h4 class="h5">Selecciona una tarjeta de desafío</h4>
+                                <p>Cada tarjeta muestra pistas sobre la ubicación de los diferentes elementos en el tablero.</p>
+                            </div>
+                        </div>
+                        <div class="step-box d-flex align-items-start">
+                            <div class="step-number">3</div>
+                            <div>
+                                <h4 class="h5">Ubica los elementos</h4>
+                                <p>Siguiendo las pistas, coloca cada animal y objeto en su posición correcta dentro de la cuadrícula.</p>
+                            </div>
+                        </div>
+                        <div class="step-box d-flex align-items-start">
+                            <div class="step-number">4</div>
+                            <div>
+                                <h4 class="h5">Verifica tu solución</h4>
+                                <p>Comprueba si has ubicado correctamente todos los elementos según las pistas proporcionadas.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="ratio ratio-16x9 mb-4">
+                        <iframe src="https://www.youtube.com/watch?v=qRRAVLFpzzM" title="YouTube video" allowfullscreen></iframe>
+                    </div>
+                    <div class="card p-3">
+                        <h4 class="h5 mb-3">Contenido del juego:</h4>
+                        <div class="row">
+                            <div class="col-6">
+                                <ul class="mb-0">
+                                    <li>3 tablero de juego</li>
+                                    <li>5 fichas de animales</li>
+                                    <li>Instrucciones de uso</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="py-5 my-5" id="galeria">
+        <div class="container">
+            <h2 class="section-title">Galería</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="https://1.bp.blogspot.com/-03NBFs__rFk/XDNbr7XJG5I/AAAAAAAAJp8/Hvo-NYuTFvAME_WczRr6qDvqRYgf8STtwCLcBGAs/s1600/P1420977.JPG" alt="Niños jugando Topologix" class="img-fluid gallery-img">
+                </div>
+                <div class="col-md-4">
+                    <img src="https://kreatywnewrota.pl/wp-content/uploads/2017/03/IMG_3522-1024x683.jpg" alt="Tablero de juego" class="img-fluid gallery-img">
+                </div>
+                <div class="col-md-4">
+                    <img src="https://www.didacto.com/7877-thickbox_default/topologix.jpg" alt="Tarjetas de desafío" class="img-fluid gallery-img">
+                </div>
+                <div class="col-md-6">
+                    <img src="https://www.allomaari.net/wordpress/wp-content/uploads/2022/01/dj08354_1-1topo.jpg" alt="Ejemplo de juego" class="img-fluid gallery-img">
+                </div>
+                <div class="col-md-6">
+                    <img src="https://i.ytimg.com/vi/gH1W_hnBLHI/maxresdefault.jpg" alt="Componentes del juego" class="img-fluid gallery-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 mb-4 mb-md-0">
+                    <h4 class="h5">Proyecto Escolar Topologix</h4>
+                    <p class="mb-0">Este sitio web es un proyecto escolar sin ánimo de lucro creado con fines educativos. No está afiliado oficialmente con los creadores del juego Topologix.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p>© 2025 Proyecto Educativo</p>
+                    <small>Desarrollado como parte de un proyecto escolar</small>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
