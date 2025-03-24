@@ -13,43 +13,44 @@
 
     <div class="container-fluid">
 
-        <div class="row d-flex justify-content-center">
+        <div class="row d-flex justify-content-center" style="height: 100vh;">
 
             <div class="col-12 d-flex justify-content-center">
-                <h1 class=" text-white fw-bolder">TOPOLOGIX</h1>
+                <a class=" text-white fw-bolder align-items-center justify-content-center d-flex h1 text-decoration-none" href="/welcome.html">TOPOLOGIX</a>
             </div>
 
-            <div class=" row bgCianLight d-flex justify-content-center">
+            <div class="d-flex justify-content-center row bgCianLight pb-md-4 pt-md-4" id="main">
 
-                <div class="col-12 col-md-6 mt-3 d-flex justify-content-center mt-md-2 m-md-0">
+                <div class="mt-3 d-flex justify-content-center mt-md-2 m-md-0" id="contenedor-1">
+                    <!-- Fila superior con objetos --><!-- Fila superior con objetos -->
                     <img class="img-fluid rounded-4" src="/images/tableros/Nivel2.svg" alt="">
                 </div>
 
-                <div class="row w-100 w-100 mt-2 d-flex justify-content- d-md-none">
+                <div class="row w-100 w-100 mt-2 d-flex justify-content-center d-md-none ps-1 pe-1">
                     <div
                         class="col-10 mt-2 mb-2 bgWoodLight rounded-3 d-flex justify-content-around align-items-center border-secondary border-3 border">
-                        <img id="ave" class="img-fluid" src="/images/animales/aveCelular.png"
+                        <img id="ave" class="img-fluid ave" src="/images/animales/aveCelular.png"
                             style="height: 40px; display: none;">
-                        <img id="gato" class="img-fluid" src="/images/animales/gatoCelular.png"
+                        <img id="gato" class="img-fluid gato" src="/images/animales/gatoCelular.png"
                             style="height: 40px; display: none;">
-                        <img id="oso" class="img-fluid" src="/images/animales/osoCelular.png"
+                        <img id="oso" class="img-fluid oso" src="/images/animales/osoCelular.png"
                             style="height: 40px; display: none;">
-                        <img id="rana" class="img-fluid" src="/images/animales/ranaCelular.png"
+                        <img id="rana" class="img-fluid rana" src="/images/animales/ranaCelular.png"
                             style="height: 40px; display: none;">
-                        <img id="raton" class="img-fluid" src="/images/animales/ratonCelular.png"
+                        <img id="raton" class="img-fluid raton" src="/images/animales/ratonCelular.png"
                             style="height: 40px; display: none;">
                     </div>
-                    <div class="col-2">
+                    <div class="col-2 d-flex justify-content-end">
                         <div class="row m-0 mt-2 mb-2 bgWoodLight  border border-3 border-secondary rounded-3 d-flex justify-content-center align-items-center"
-                            style="width: 50px; height: 50px;">
-                            <img class="img-fluid p-0" src="" alt="" id="imageToFoud"
+                            style="width: 50px; ">
+                            <img class="img-fluid p-0 " src="" alt="" id="imageToFoud1"
                                 style="height: 40px; width: 40px;">
-                            <input type="text" class=" d-none" name="" id="imageName">
+                            <input type="text" class=" d-none " name="" id="imageName1">
                         </div>
                     </div>
                 </div>
 
-                <div class="col-12 col-md-6 mt-1 mb-2 justify-content-center mt-md-2 m-md-0 d-md-none">
+                <div class="col-12 col-md-6 mt-1 mb-1 justify-content-center mt-md-2 m-md-0 d-md-none">
                     <div class="carousels-wrapper">
                         <!-- Primer Carrusel -->
                         <div class="containerr  ">
@@ -105,42 +106,146 @@
                         </div>
 
                         <div class=" col-12 mt-3">
-                            <button onclick="mostrarDatos()" type="button" class="w-100 btn btn-primary btn-lg"
+                            <div type="div" onclick="mostrarDatos()" class="w-100 btn btn-primary btn-lg"
                                 data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 Verificar
-                            </button>
-
-                            <!-- Modal -->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                                aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered6">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body d-flex justify-content-center align-items-center">
-                                            <img id="celebration" src="" alt="" class="img-fluid" style="display: none; height: 200px;  width: 200px;">
-                                            <audio id="sonidoCorrecto" src="/sounds/correct.mp3"></audio>
-                                            <audio id="sonidoIncorrecto" src="sounds/error.mp3"></audio>
-                                            <audio id="sonidoSuperado"
-                                                src="sounds/kids-saying-yay-sound-effect_xryiS4g.mp3"></audio>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Cerrar</button>
-                                            <a id="NextLevel" href="/index3.html" class="btn btn-primary" style="display: none;">Siguiente
-                                                nivel</a>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="d-none d-md-flex justify-content-center align-items-center" id="contenedor-2">
+                    <!-- Fila superior con objetos --><!-- Fila superior con objetos -->
+                    <div class="tablero" id="Tablero">
+                        <!-- Fila superior con objetos -->
+                        <div class="fila">
+                            <div class="celda-lateral">
+                                <div class="imagen-placeholder">
+                                    <img class="p-0 rounded-5 imagenLateral" src="" alt="" id="imageToFoud2">
+                                    <input type="text" class=" d-none" name="" id="imageName2">
+                                </div>
+                            </div>
+                            <div class="celda-lateral">
+                                <div class="imagen-placeholder"><img class="imagenLateral"
+                                        src="/images/Disposiciones/arriba_computadora.png"></div>
+                            </div>
+                            <div class="celda-lateral">
+                                <div class="imagen-placeholder"><img class="imagenLateral"
+                                        src="/images/Disposiciones/abajo_computadora.png"></div>
+                            </div>
+                            <div class="celda-lateral">
+                                <div class="imagen-placeholder"><img class="imagenLateral"
+                                        src="/images/Disposiciones/frente_computadora.png"></div>
+                            </div>
+                            <div class="celda-lateral">
+                                <div class="imagen-placeholder"><img class="imagenLateral"
+                                        src="/images/Disposiciones/atras_computadora.png"></div>
+                            </div>
+                            <div class="celda-lateral">
+                                <div class="imagen-placeholder"><img class="imagenLateral"
+                                        src="/images/Disposiciones/dentro_computadora.png"></div>
+                            </div>
+                        </div>
+
+                        <!-- Fila 1 -->
+                        <div class="fila">
+                            <div class="celda-lateral">
+                                <div class="imagen-placeholder"><img class="imagenLateral"
+                                        src="/images/lugares/piedra_computadora.png" alt=""></div>
+                            </div>
+                            <div class="celda rana"><img id="rana" class="img-fluid rounded-5 rana imagenLateral"
+                                src="/images/animales/ranaCelular.png" style=" display: none ;"></div>
+                            <div class="celda"></div>
+                            <div class="celda"></div>
+                            <div class="celda"></div>
+                            <div class="celda"></div>
+                        </div>
+
+                        <!-- Fila 2 -->
+                        <div class="fila">
+                            <div class="celda-lateral">
+                                <div class="imagen-placeholder"><img class="imagenLateral"
+                                        src="/images/lugares/arbol_computadora.png" alt=""></div>
+                            </div>
+                            <div class="celda ave"><img id="ave" class="img-fluid rounded-5 ave imagenLateral"
+                                src="/images/animales/aveCelular.png" style=" display: none ;"></div>
+                            <div class="celda"></div>
+                            <div class="celda"></div>
+                            <div class="celda"></div>
+                            <div class="celda"></div>
+                        </div>
+
+                        <!-- Fila 3 -->
+                        <div class="fila">
+                            <div class="celda-lateral">
+                                <div class="imagen-placeholder"><img class="imagenLateral"
+                                        src="/images/lugares/casa_computadora.png" alt=""></div>
+                            </div>
+                            <div class="celda raton"><img id="raton" class="img-fluid rounded-5 raton imagenLateral"
+                                src="/images/animales/ratonCelular.png" style=" display: none ;"></div>
+                            <div class="celda"></div>
+                            <div class="celda"></div>
+                            <div class="celda"></div>
+                            <div class="celda gato"><img id="gato" class="img-fluid rounded-5 gato imagenLateral"
+                                src="/images/animales/gatoCelular.png" style=" display: none ;"></div>
+                        </div>
+
+                        <!-- Fila 4 -->
+                        <div class="fila">
+                            <div class="celda-lateral">
+                                <div class="imagen-placeholder"><img class="imagenLateral"
+                                        src="/images/lugares/valde_computadora.png" alt=""></div>
+                            </div>
+                            <div class="celda"></div>
+                            <div class="celda"></div>
+                            <div class="celda"></div>
+                            <div class="celda oso"><img id="oso" class="img-fluid rounded-5 oso imagenLateral"
+                                src="/images/animales/osoCelular.png" style=" display: none ;"></div>
+                            <div class="celda"></div>
+                        </div>
+
+                        <!-- Fila 5 -->
+                        <div class="fila">
+                            <div class="celda-lateral">
+                                <div class="imagen-placeholder"><img class="imagenLateral"
+                                        src="/images/lugares/hongo_computadora.png" alt=""></div>
+                            </div>
+                            <div class="celda"></div>
+                            <div class="celda"></div>
+                            <div class="celda"></div>
+                            <div class="celda">
+                            </div>
+                            <div class="celda">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog modal-dialog-centered6">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
+                    <div type="div" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></div>
+                </div>
+                <div class="modal-body d-flex justify-content-center align-items-center">
+                    <img id="celebration" src="" alt="" class="img-fluid"
+                        style="display: none; height: 200px;  width: 200px;">
+                    <audio id="sonidoCorrecto" src="/sounds/correct.mp3"></audio>
+                    <audio id="sonidoIncorrecto" src="sounds/error.mp3"></audio>
+                    <audio id="sonidoSuperado" src="sounds/kids-saying-yay-sound-effect_xryiS4g.mp3"></audio>
+
+                </div>
+                <div class="modal-footer">
+                    <div type="div" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</div>
+                    <a id="NextLevel" href="/index3.html" class="btn btn-primary" style="display: none;">Siguiente
+                        nivel</a>
+                </div>
             </div>
         </div>
     </div>

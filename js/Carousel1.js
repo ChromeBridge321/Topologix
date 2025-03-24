@@ -499,7 +499,7 @@ function ajustarTablero() {
 }
 
 // Ajustar el tablero al cargar la página
-ajustarTablero();
 
+ajustarTablero();
 // Ajustar el tablero cuando se redimensiona la ventana
-window.addEventListener('resize', ajustarTablero);
+window.addEventListener('orientationchange', ajustarTablero);

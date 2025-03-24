@@ -35,8 +35,6 @@ const raton = {
 let imagenes = [gato, ave, oso, rana, raton]; // varibale que guarda a los obejetos
 let imagenAleatoria = imagenes[Math.floor(Math.random() * imagenes.length)]; // seleccion de una posicion aleatoria del array imagenes
 let CorrectAnswers = ['aveArribaArbol', 'osoFrenteCasa', 'ranaAtrasValde', 'gatoAbajoArbol', 'ratonArribaPiedra']
-let respuestas = JSON.parse(localStorage.getItem("respuestas")) || []; // array para guardar las respuestas correctas
-let contador = parseInt(localStorage.getItem("contador")) || 0; // determinara si ya se han alcanzado todas las respuestas
 // Reproducir el sonido correspondiente
 const sonidoCorrecto = document.getElementById("sonidoCorrecto");
 const sonidoIncorrecto = document.getElementById("sonidoIncorrecto");
@@ -44,7 +42,25 @@ const sonidoSuperado = document.getElementById("sonidoSuperado");
 sonidoCorrecto.volume = 0.4;
 sonidoIncorrecto.volume = 0.2;
 sonidoSuperado.volume = 0.2;
-console.log("Respuestas actuales:", respuestas + ' contador: ' + contador);
+let tituloModal = document.getElementById("exampleModalLabel");
+let imagenEncontrada = document.querySelectorAll(`.${imagenAleatoria.nombre}`);
+let Asnwer = imagenAleatoria.nombre + nameOfPosition + currentObjectName; // variable que representa la respuesta dada por el usuario
+let imgCelebration = document.getElementById("celebration");
+let siguienteNivel = document.getElementById("NextLevel");
+
+let ImageName1 = document.getElementById("imageName1");
+let ImageToFound1 = document.getElementById("imageToFoud1");
+let ImageName2 = document.getElementById("imageName2");
+let ImageToFound2 = document.getElementById("imageToFoud2");
+
+const celdas = document.querySelectorAll('.celda');
+
+// Agrega el event listener a cada celda
+celdas.forEach(celda => {
+    celda.addEventListener('click', mostrarDatosTablero);
+    celda.setAttribute('data-bs-toggle', 'modal');
+    celda.setAttribute('data-bs-target', '#exampleModal');
+});
 
 // Función para crear un controlador de carrusel
 // funciones que manejan las animaciones y traslacion de los carruseles por separado
@@ -277,68 +293,85 @@ function createCarouselController2(carousel) {
 }
 ///////////////////////////////////////////////////
 function mostrarDatos() { // funcion que muestra el manejo de los datos
-try {
-    let tituloModal = document.getElementById("exampleModalLabel");
-    let imagenEncontrada = document.getElementById(imagenAleatoria.nombre);
-    let Asnwer = imagenAleatoria.nombre + nameOfPosition + currentObjectName; // variable que representa la respuesta dada por el usuario
-    let imgCelebration = document.getElementById("celebration");
-    if (CorrectAnswers.includes(Asnwer)) { // condicional que muestra si la respuesta es correcta o no
-        sonidoCorrecto.play(); // Reproducir sonido correcto
-        tituloModal.textContent = "¡Felicidades! Has respondido correctamente. ";
-        agregarRespuesta(Asnwer); // guardar la respuesta correcta cada vez que se encuentre en session storage
-        // Cambiar el contenido del <h1>
-        imagenes = imagenes.filter(item => item !== imagenAleatoria);
-        imagenEncontrada.style.display = "inline";
-        imgCelebration.style.display = "inline";
-        imgCelebration.setAttribute("src", "images/tableros/gif-animado-celebrar-cumple.gif");
-        imagenAleatoria = imagenes[Math.floor(Math.random() * imagenes.length)]; // seleccion de una posicion 
-        console.log(imagenes);
-        cambiarImagen();
-    } else {
-        sonidoIncorrecto.play(); // Reproducir sonido de nivel superado
-        imgCelebration.style.display = "inline";
-        imgCelebration.setAttribute("src", "images/tableros/bduck-duck.gif");
-        tituloModal.textContent = "Lo siento, esa no es la respuesta correcta.";
+    try {
+        tituloModal = document.getElementById("exampleModalLabel");
+        imagenEncontrada = document.querySelectorAll(`.${imagenAleatoria.nombre}`);
+        Asnwer = imagenAleatoria.nombre + nameOfPosition + currentObjectName; // variable que representa la respuesta dada por el usuario
+        imgCelebration = document.getElementById("celebration");
+        if (CorrectAnswers.includes(Asnwer)) { // condicional que muestra si la respuesta es correcta o no
+            sonidoCorrecto.play(); // Reproducir sonido correcto
+            tituloModal.textContent = "¡Felicidades! Has respondido correctamente. ";
+            imagenes = imagenes.filter(item => item !== imagenAleatoria);
+            imagenEncontrada.forEach(elemento => {
+                if (elemento.style.display === 'none') {
+                    elemento.style.display = 'block'; // Cambia a 'block' o el valor que necesites
+                }
+            });
+            imgCelebration.style.display = "inline";
+            imgCelebration.setAttribute("src", "images/tableros/gif-animado-celebrar-cumple.gif");
+            imagenAleatoria = imagenes[Math.floor(Math.random() * imagenes.length)]; // seleccion de una posicion 
+            cambiarImagen();
+        } else {
+            sonidoIncorrecto.play(); // Reproducir sonido de nivel superado
+            imgCelebration.style.display = "inline";
+            imgCelebration.setAttribute("src", "images/tableros/bduck-duck.gif");
+            tituloModal.textContent = "Lo siento, esa no es la respuesta correcta.";
+        }
+    } catch (error) {
+        siguienteNivel = document.getElementById("NextLevel");
+        siguienteNivel.style.display = "inline";
+        tituloModal.textContent = "¡Felicidades! Has completado el nivel. 🎉🎊🎉";
+        sonidoSuperado.play();
+        return;
     }
-} catch (error) {
-    let tituloModal = document.getElementById("exampleModalLabel");
-    let siguienteNivel  = document.getElementById("NextLevel");
-    siguienteNivel.style.display="inline";
-    tituloModal.textContent = "¡Felicidades! Has completado todos los niveles. 🎉🎊🎉";
-    sonidoSuperado.play();
-    return;
-}
-
-}
-
-// 2. Función para agregar una nueva respuesta
-function agregarRespuesta(respuesta) {
-
-    if (!(respuestas.includes(respuesta))) {
-        // Agregar la nueva respuesta al array
-        respuestas.push(respuesta);
-        contador++;
-        // Guardar el array actualizado en localStorage
-        localStorage.setItem("respuestas", JSON.stringify(respuestas));
-        localStorage.setItem("contador", contador);
-        console.log("Respuestas actuales:", respuestas + ' contador: ' + contador);
-    } else {
-        return; // si la respuesta ya esta retorna nada
-    }
-
-}
-
-function borrarLocalStorage() {
-    // Borra todos los datos del localStorage
-    localStorage.clear();
-    console.log("LocalStorage borrado.");
 }
 
 function cambiarImagen() { // funcion para cambiar de imagen cada que se recargue la pagina
-    // Asignamos el src a la imagen
-    document.getElementById("imageName").setAttribute("name", imagenAleatoria.nombre); // asigna la el nombre de la imagen que se debe encontrar
-    document.getElementById("imageToFoud").setAttribute("src", imagenAleatoria.src); // asigna el src de la imagen que se debe encontrar
+    document.getElementById("imageName1").setAttribute("name", imagenAleatoria.nombre);
+    document.getElementById("imageToFoud1").setAttribute("src", imagenAleatoria.src);
+    document.getElementById("imageName2").setAttribute("name", imagenAleatoria.nombre);
+    document.getElementById("imageToFoud2").setAttribute("src", imagenAleatoria.src);
+
 }
+
+
+function mostrarDatosTablero(event) {
+    try {
+        tituloModal = document.getElementById("exampleModalLabel");
+        // Obtiene el elemento sobre el que se hizo clic
+        let elemento = event.target;
+        imagenEncontrada = document.querySelectorAll(`.${imagenAleatoria.nombre}`);
+        // Verifica si el elemento tiene la clase "celda"
+        if ((elemento.classList.contains('celda')) && (elemento.classList.contains(imagenAleatoria.nombre))) {
+            sonidoCorrecto.play(); // Reproducir sonido correcto
+            imgCelebration.style.display = "inline";
+            imgCelebration.setAttribute("src", "images/tableros/gif-animado-celebrar-cumple.gif");
+            tituloModal.textContent = "¡Felicidades! Has respondido correctamente. ";
+            //alert("¡Felicidades! Has respondido correctamente. ");
+            imagenes = imagenes.filter(item => item !== imagenAleatoria);
+            imagenAleatoria = imagenes[Math.floor(Math.random() * imagenes.length)];
+            imagenEncontrada.forEach(elemento => {
+                if (elemento.style.display === 'none') {
+                    elemento.style.display = 'block'; // Cambia a 'block' o el valor que necesites
+                }
+            });
+            cambiarImagen();
+        } else {
+            sonidoIncorrecto.play(); // Reproducir sonido de nivel superado
+            imgCelebration.style.display = "inline";
+            imgCelebration.setAttribute("src", "images/tableros/bduck-duck.gif");
+            tituloModal.textContent = "Lo siento, esa no es la respuesta correcta.";
+            //alert("Lo siento, esa no es la respuesta correcta.");
+        }
+    } catch (error) {
+        siguienteNivel = document.getElementById("NextLevel");
+        siguienteNivel.style.display = "inline";
+        tituloModal.textContent = "¡Felicidades! Has completado el nivel. 🎉🎊🎉";
+        sonidoSuperado.play();
+        return;
+    }
+}
+
 
 
 // Inicializar ambos carruseles
@@ -347,4 +380,127 @@ const carousel2 = document.querySelectorAll('.carousel2');
 const updateFunctions1 = Array.from(carousel1).map(createCarouselController1);
 const updateFunctions2 = Array.from(carousel2).map(createCarouselController2);
 
+const main = document.getElementById("main");
+const tablero = document.getElementById("Tablero");
+const contenedor1 = document.getElementById("contenedor-1");
+const contenedor2 = document.getElementById("contenedor-2");
+const imagenLateral = document.querySelectorAll(".imagenLateral");
+const filas = document.querySelectorAll(".fila");
+const celdaLateral = document.querySelectorAll(".celda-lateral");
 
+
+
+function ajustarTablero() {
+    // Obtener el ancho y alto de la ventana
+    const anchoPantalla = window.innerWidth;
+    const altoPantalla = window.innerHeight;
+
+
+    if (anchoPantalla >= 720) {
+        tablero.style.height = "400px";  //40
+        tablero.style.width = "400px";
+        
+        imagenLateral.forEach(celda => {
+            celda.style.width = "40px";
+            celda.style.height = "40px";
+        });
+
+        celdas.forEach(celda => {
+            celda.classList.add("celda1");
+            celda.classList.remove("celda2");
+            celda.classList.remove("celda3");
+        });
+
+                filas.forEach(fila => {
+            fila.classList.add("fila1");
+            fila.classList.remove("fila2");
+            fila.classList.remove("fila3");
+        });
+
+        celdaLateral.forEach(celda => {
+            celda.classList.add("celda-lateral1");
+            celda.classList.remove("celda-lateral2");
+            celda.classList.remove("celda-lateral3");
+        });
+
+    }
+
+
+    if (anchoPantalla >= 1160) {
+        tablero.style.height = "500px"; //60
+        tablero.style.width = "500px";
+
+
+        celdas.forEach(celda => {
+            celda.classList.add("celda2");
+            celda.classList.remove("celda1");
+            celda.classList.remove("celda3");
+        });
+
+                filas.forEach(fila => {
+            fila.classList.add("fila2");
+            fila.classList.remove("fila1");
+            fila.classList.remove("fila3");
+        });
+
+        celdaLateral.forEach(celda => {
+            celda.classList.add("celda-lateral2");
+            celda.classList.remove("celda-lateral1");
+            celda.classList.remove("celda-lateral3");
+        });
+
+        imagenLateral.forEach(celda => {
+            celda.style.height = "60px";
+            celda.style.width = "60px";
+        });
+
+    }
+
+    if (anchoPantalla >= 1320) {
+        tablero.style.height = "600px"; //80
+        tablero.style.width = "600px";
+        celdas.forEach(celda => {
+            celda.classList.add("celda3");
+            celda.classList.remove("celda2");
+            celda.classList.remove("celda1");
+        });
+
+        filas.forEach(fila => {
+            fila.classList.add("fila3");
+            fila.classList.remove("fila2");
+            fila.classList.remove("fila1");
+        });
+
+        celdaLateral.forEach(celda => {
+            celda.classList.add("celda-lateral3");
+            celda.classList.remove("celda-lateral2");
+            celda.classList.remove("celda-lateral1");
+        });
+
+        imagenLateral.forEach(celda => {
+            celda.style.height = "80px";
+            celda.style.width = "80px";
+        });
+
+
+
+
+    }
+
+    if (anchoPantalla > altoPantalla) {
+        main.style.display = "flex";
+        contenedor1.classList.add("col-md-6");
+        contenedor2.classList.add("col-md-6");
+    } else {
+        main.style.display = "block";
+        contenedor1.classList.add("col-md-12");
+        contenedor2.classList.add("col-md-12");
+        contenedor2.classList.add("pt-5");
+    }
+}
+
+// Ajustar el tablero al cargar la página
+
+ajustarTablero();
+// Ajustar el tablero cuando se redimensiona la ventana
+window.addEventListener('orientationchange', ajustarTablero);
