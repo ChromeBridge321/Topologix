@@ -16,121 +16,63 @@ body {
     padding: 20px 0;
 }
 
-.containerr {
-position: relative;
-width: 100%;
-max-width: 800px;
-height: 40vh;
-max-height: 300px;
-margin: 0 auto;
-overflow: hidden;
-touch-action: pan-y pinch-zoom;
-background-color: #01787E;
-border-radius: 15px;
-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+.bgWoodLight {
+    background-color: #F4E6B9;
 }
 
-@media (max-width: 480px) {
-    .containerr {
-        height: 35vh;
-        max-height: 250px;
-    }
-
-    .carousels-wrapper {
-        gap: 10px;
-        padding: 10px 0;
-    }
+.bgWoodDark {
+    background-color: #AF9235;
 }
 
-.carousel {
-    position: relative;
-    height: 100%;
-    cursor: grab;
+.bgCianDark {
+    background-color: #01787E;
+}
+
+
+.bgCianLight {
+    background-color: #42D9C8;
+}
+
+.bgOlivaDark {
+    background-color: #1F271B;
+}
+
+.tablero {
+    background-color: #01787E;
+    border-radius: 15px;
+    padding: 15px;
+    width: 600px;
+    height: 600px;
+
+}
+
+.fila {
     display: flex;
+    margin-bottom: 13px;
+    height: 80px;
+    justify-content: space-around;
     align-items: center;
+}
+
+.celda {
+    width: 80px;
+    height: 80px;
+    margin: 5px;
+    border-radius: 8px;
+    background-color: white;
+    display: flex;
     justify-content: center;
-    transform-style: preserve-3d;
-    user-select: none;
-    -webkit-user-select: none;
+    align-items: center;
 }
 
-.carousel.grabbing {
-    cursor: grabbing;
-    transition: none;
-}
-
-.carousel:not(.grabbing) {
-    transition: transform 0.3s ease-out;
-}
-
-
-.item {
-position: absolute;
-width: calc(100vw * 0.6);
-max-width: 250px;
-height: 85%;  /* Cambiado de auto a 85% */
-display: flex;
-align-items: center;
-justify-content: center;
-transition: all 0.5s ease;
-border-radius: 10px;
-overflow: hidden;
-left: 50%;
-transform: translateX(-50%);
-}
-
-.item img {
-width: 100%;
-height: 100%;
-object-fit: contain;  /* Cambiado de cover a contain */
-transition: all 0.5s ease;
--webkit-user-drag: none;
-pointer-events: none;
-}
-
-@media (max-width: 480px) {
-.containerr {
-    height: 35vh;
-    max-height: 250px;
-}
-
-.item {
-    width: calc(100vw * 0.5);
-    max-width: 200px;
-    height: 85%;  /* Aseguramos que también se aplique en móviles */
-}
-}
-
-/* Añadimos una media query específica para orientación horizontal en móviles */
-@media (max-width: 900px) and (orientation: landscape) {
-.containerr {
-    height: 60vh;  /* Aumentamos la altura relativa en modo paisaje */
-    max-height: 200px;  /* Limitamos la altura máxima */
-}
-
-.item {
-    height: 85%;
-}
-}
-
-
-.item:not(.active) {
-    transform: translateX(-50%) scale(0.7);
-    filter: brightness(0.6);
-    opacity: 0.7;
-}
-
-.item.active {
-    transform: translateX(-50%) scale(1);
-    z-index: 2;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-    
-}
-
-.carousel-title {
-    text-align: center;
-    padding: 10px;
-    font-family: Arial, sans-serif;
-    color: #333;
-    font-size: 1.2em;
+.celda-lateral {
+    width: 80px;
+    height: 80px;
+    margin: 5px;
+    border-radius: 8px;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
