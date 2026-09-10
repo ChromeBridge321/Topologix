@@ -185,3 +185,51 @@ function mostrarDatosTablero(event) {
     inicializarPrimerAnimal();
 
 })();
+
+
+/* =========================
+   MODAL COMPARTIDO
+========================= */
+
+const modalResultado = document.getElementById('exampleModal');
+
+const cerrarModalResultado = () => {
+    modalResultado.classList.remove('show');
+    modalResultado.setAttribute('aria-hidden', 'true');
+    modalResultado.removeAttribute('aria-modal');
+    document.querySelectorAll('.modal-backdrop').forEach((fondo) => fondo.remove());
+    document.body.style.overflow = '';
+};
+
+const abrirModalResultado = () => {
+    modalResultado.classList.add('show');
+    modalResultado.setAttribute('aria-modal', 'true');
+    modalResultado.removeAttribute('aria-hidden');
+    document.body.style.overflow = 'hidden';
+
+    if (!document.querySelector('.modal-backdrop')) {
+        const fondo = document.createElement('div');
+        fondo.className = 'modal-backdrop fade show';
+        fondo.addEventListener('click', cerrarModalResultado);
+        document.body.appendChild(fondo);
+    }
+};
+
+celdas.forEach((celda) => {
+    celda.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            celda.click();
+        }
+    });
+});
+
+document.addEventListener('click', (event) => {
+    if (event.target.closest('.celda')) {
+        abrirModalResultado();
+    }
+
+    if (event.target.closest('[data-bs-dismiss="modal"]')) {
+        cerrarModalResultado();
+    }
+});
