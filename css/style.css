@@ -1,0 +1,79 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow-x: hidden;
+    background-color: #f0f0f0;
+}
+
+.carousels-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px 0;
+}
+
+
+.bgWoodLight {
+    background-color: #F4E6B9;
+}
+
+.bgWoodDark {
+    background-color: #AF9235;
+}
+
+.bgCianDark {
+    background-color: #01787E;
+}
+
+
+.bgCianLight {
+    background-color: #42D9C8;
+}
+
+.bgOlivaDark {
+    background-color: #1F271B;
+}
+
+.tablero {
+    background-color: #01787E;
+    border-radius: 15px;
+    padding: 15px;
+    width: 600px;
+    height: 600px;
+
+}
+
+.fila {
+    display: flex;
+    margin-bottom: 13px;
+    height: 80px;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.celda {
+    width: 80px;
+    height: 80px;
+    margin: 5px;
+    border-radius: 8px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.celda-lateral {
+    width: 80px;
+    height: 80px;
+    margin: 5px;
+    border-radius: 8px;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
