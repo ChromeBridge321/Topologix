@@ -34,19 +34,19 @@ const mostrarResultado = (tipoRespuesta) => {
     const respuestas = {
         Correcta: {
             titulo: '¡Felicidades! Has respondido correctamente.',
-            imagen: 'images/tableros/respuestaCorrecta.gif',
+            imagen: 'images/respuestas/respuestaCorrecta.gif',
             sonido: 'sonidoCorrecto'
         },
 
         Incorrecta: {
             titulo: 'Lo siento, esa no es la respuesta correcta.',
-            imagen: 'images/tableros/respuestaIncorrecta.gif',
+            imagen: 'images/respuestas/respuestaIncorrecta.gif',
             sonido: 'sonidoIncorrecto'
         },
 
         Superado: {
             titulo: '¡Felicidades! Has completado el nivel. 🎉🎊🎉',
-            imagen: 'images/tableros/respuestaCorrecta.gif',
+            imagen: 'images/respuestas/respuestaCorrecta.gif',
             sonido: 'sonidoSuperado'
         }
     };
@@ -72,7 +72,7 @@ const crearAnimalesArray = () => {
     nombreAnimales.forEach((animalNombre) => {
         animalesArray.push({
             nombre: animalNombre,
-            src: `/images/animales/${animalNombre}Celular.png`
+            src: `/images/animales/${animalNombre}.png`
         });
 
     });
