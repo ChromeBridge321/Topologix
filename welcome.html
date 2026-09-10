@@ -1,466 +1,163 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Topologix - Juego Educativo para Niños</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary: #0d8b8b;
-            --primary-light: #10a8a8;
-            --secondary: #ffc107;
-            --secondary-warm: #ffd54f;
-            --accent: #ff7f50;
-            --light: #f8f9fa;
-            --dark: #2a5555;
-            --cream: #fffbf0;
-        }
-
-        * { font-family: 'Nunito', sans-serif; }
-
-        h1, h2, h3, h4, h5 {
-            font-family: 'Fredoka', sans-serif;
-        }
-
-        .section-title {
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 60px;
-            height: 4px;
-            background: var(--secondary);
-            border-radius: 999px;
-        }
-
-        .section-title-center::after {
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .card-hover {
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .card-hover:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 20px 40px rgba(13, 139, 139, 0.12);
-        }
-
-        .character-icon {
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .character-icon:nth-child(2) { animation-delay: 0.3s; }
-        .character-icon:nth-child(3) { animation-delay: 0.6s; }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
-
-        .hero-shape {
-            position: absolute;
-            border-radius: 50%;
-            opacity: 0.08;
-        }
-
-        .step-line::before {
-            content: '';
-            position: absolute;
-            left: 18px;
-            top: 44px;
-            bottom: -12px;
-            width: 2px;
-            background: var(--primary);
-            opacity: 0.2;
-        }
-
-        .step-line:last-child::before {
-            display: none;
-        }
-
-        .gallery-item {
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .gallery-item:hover {
-            transform: scale(1.03);
-        }
-
-        .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-    </style>
+    <meta name="description" content="Topologix: un juego de mesa educativo para descubrir el espacio jugando.">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Topologix · Aprende jugando</title>
 </head>
-<body class="bg-[var(--light)] text-gray-600 antialiased overflow-x-hidden">
 
-    <!-- Navbar -->
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-[var(--primary)]/90 backdrop-blur-lg">
-        <div class="max-w-6xl mx-auto px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <a class="text-white font-bold text-3xl tracking-tight" href="#">
-                    TOPOLOGIX
-                </a>
-                <div class="hidden md:flex items-center gap-8">
-                    <a class="text-sm font-medium text-white/80 hover:text-white transition-colors" href="#inicio">Inicio</a>
-                    <a class="text-sm font-medium text-white/80 hover:text-white transition-colors" href="#sobre-el-juego">El juego</a>
-                    <a class="text-sm font-medium text-white/80 hover:text-white transition-colors" href="#como-jugar">Cómo jugar</a>
-                    <a class="text-sm font-medium text-white/80 hover:text-white transition-colors" href="#galeria">Galería</a>
-                </div>
-                <a href="nivel1.html" class="hidden md:inline-flex items-center gap-2 bg-white text-[var(--dark)] px-5 py-2 rounded-full text-sm font-semibold hover:bg-white/90 transition-colors shadow-sm">
-                    <i class="fas fa-play text-xs"></i>
-                    Jugar
-                </a>
-                <button id="menuToggle" class="md:hidden text-white text-2xl focus:outline-none" aria-label="Abrir menú" aria-expanded="false">
-                    <i class="fas fa-bars"></i>
-                </button>
+<body class="home-page">
+    <div class="home-wrap">
+        <nav class="home-nav" id="home-nav" aria-label="Navegación principal">
+            <a class="brand" href="#inicio" aria-label="Inicio de Topologix"><span class="brand-mark" aria-hidden="true">T</span><span>TOPOLOGIX</span></a>
+            <div class="home-nav-links">
+                <a href="#el-juego">El juego</a>
+                <a href="#sobre-topologix">Sobre Topologix</a>
+                <a href="#como-jugar">Cómo jugar</a>
+                <a href="#niveles">Niveles</a>
             </div>
-        </div>
-    </nav>
+            <a class="home-nav-cta" href="nivel1.html">Empezar a jugar</a>
+            <button class="home-menu-toggle" id="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="home-nav-links">☰</button>
+        </nav>
 
-    <!-- Mobile Menu -->
-    <div id="mobileMenu" class="fixed inset-0 z-[60] bg-[var(--dark)]/95 backdrop-blur-lg hidden md:hidden">
-        <div class="flex flex-col items-center justify-center h-full gap-8">
-            <a class="text-xl font-medium text-white hover:text-[var(--secondary)] transition-colors" href="#inicio" onclick="closeMenu()">Inicio</a>
-            <a class="text-xl font-medium text-white hover:text-[var(--secondary)] transition-colors" href="#sobre-el-juego" onclick="closeMenu()">El juego</a>
-            <a class="text-xl font-medium text-white hover:text-[var(--secondary)] transition-colors" href="#como-jugar" onclick="closeMenu()">Cómo jugar</a>
-            <a class="text-xl font-medium text-white hover:text-[var(--secondary)] transition-colors" href="#galeria" onclick="closeMenu()">Galería</a>
-            <a href="nivel1.html" class="inline-flex items-center gap-2 bg-[var(--secondary)] text-[var(--dark)] px-8 py-3 rounded-full font-bold text-lg hover:bg-[var(--secondary-warm)] transition-all shadow-lg mt-4">
-                <i class="fas fa-play text-sm"></i>
-                Jugar
-            </a>
-            <button id="menuClose" class="absolute top-5 right-6 text-white text-3xl focus:outline-none" aria-label="Cerrar menú">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
+        <main>
+            <section class="home-hero" id="inicio" aria-labelledby="home-title">
+                <div>
+                    <p class="home-eyebrow">Juego de mesa educativo · 4—7 años</p>
+                    <h1 id="home-title">Piensa.<br>Busca.<br><span>Coloca.</span></h1>
+                    <p class="home-hero-copy">Un pequeño gran juego para aprender a mirar el espacio. Descubre dónde están los animales y conviértete en el explorador de tu propia mesa.</p>
+                    <div class="home-actions">
+                        <a class="home-primary-cta" href="nivel1.html">Jugar nivel 1 <span aria-hidden="true">→</span></a>
+                        <a class="home-secondary-cta" href="#como-jugar">Ver cómo se juega</a>
+                    </div>
+                    <p class="home-hero-note">Una aventura tranquila para jugar acompañado, conversar y resolver juntos.</p>
+                </div>
+
+                <div class="home-hero-art">
+                    <img src="images/tableros/Nivel1.svg" alt="Tablero ilustrado de Topologix">
+                    <div class="home-art-caption"><span>La mesa de exploración</span><span>Nivel 1</span></div>
+                    <div class="home-token"><img src="images/animales/oso.png" alt="Ficha de oso de Topologix"></div>
+                </div>
+            </section>
+
+            <section class="home-school-note" aria-labelledby="school-title">
+                <div class="home-school-seal" aria-hidden="true">✦</div>
+                <div>
+                    <p class="home-kicker">Sobre este proyecto</p>
+                    <h2 id="school-title">Una idea escolar para aprender jugando.</h2>
+                    <p>Topologix es un proyecto escolar creado con fines educativos. Es una experiencia sin fines de lucro, pensada para que niños, familias y docentes compartan una forma divertida de desarrollar el pensamiento espacial.</p>
+                </div>
+                <div class="home-school-stamp">Proyecto<br>escolar</div>
+            </section>
+
+            <section class="home-section home-about" id="sobre-topologix" aria-labelledby="about-title">
+                <div class="home-about-copy">
+                    <p class="home-kicker">El origen de la aventura</p>
+                    <h2 id="about-title">Topologix enseña a mirar el espacio con curiosidad.</h2>
+                    <p>La versión física de referencia es un juego de observación y orientación espacial de la colección Eduludo de Djeco. Cada reto invita a descubrir dónde está cada animal respecto a los objetos de una escena: arriba, abajo, delante, detrás o dentro.</p>
+                    <p>El juego físico fue diseñado por la ilustradora francesa <strong>Géraldine Cosneau</strong>. Este proyecto escolar toma esa idea de tablero, fichas y retos visuales para convertirla en una experiencia digital sencilla y accesible.</p>
+                    <div class="home-about-facts" aria-label="Datos del juego físico">
+                        <div><span>Marca</span><strong>Djeco · Eduludo</strong></div>
+                        <div><span>Edad sugerida</span><strong>A partir de 4 años</strong></div>
+                        <div><span>Formato</span><strong>Retos con autocorrección</strong></div>
+                    </div>
+                    <div class="home-about-links" aria-label="Enlaces externos sobre el juego">
+                        <a href="https://www.djeco.com/fr" target="_blank" rel="noopener noreferrer">Conocer Djeco <span aria-hidden="true">↗</span></a>
+                        <a href="https://www.djeco.com/fr/regles-des-jeux" target="_blank" rel="noopener noreferrer">Ver reglas oficiales <span aria-hidden="true">↗</span></a>
+                        <a href="https://geraldine-cosneau.blogspot.com/" target="_blank" rel="noopener noreferrer">Ver el trabajo de Géraldine <span aria-hidden="true">↗</span></a>
+                    </div>
+                </div>
+                <aside class="home-about-card" aria-label="Elementos del Topologix físico">
+                    <div class="home-about-card-top"><span>Topologix físico</span><span>DJ08354</span></div>
+                    <div class="home-mini-board" aria-hidden="true">
+                        <span class="home-mini-cell home-mini-cell-a"></span>
+                        <span class="home-mini-cell home-mini-cell-b"></span>
+                        <span class="home-mini-cell home-mini-cell-c"></span>
+                        <span class="home-mini-cell home-mini-cell-d"></span>
+                        <span class="home-mini-cell home-mini-cell-e"></span>
+                        <img src="images/animales/oso.png" alt="">
+                    </div>
+                    <div class="home-about-card-bottom"><strong>5 fichas</strong><span>20 retos para explorar</span></div>
+                </aside>
+            </section>
+
+            <section class="home-section" id="el-juego" aria-labelledby="game-title">
+                <div class="home-section-heading">
+                    <p class="home-kicker">Más que un juego</p>
+                    <h2 id="game-title">Aprender se siente mejor cuando cabe en una mesa.</h2>
+                    <p>Topologix transforma las palabras “arriba”, “dentro” o “atrás” en una misión concreta, visual y fácil de compartir.</p>
+                </div>
+                <div class="home-feature-grid">
+                    <article class="home-feature-card"><div class="home-feature-icon" aria-hidden="true">✦</div><h3>Piensa con las manos</h3><p>Las fichas y tarjetas convierten cada idea espacial en una acción que se puede mirar, mover y comprobar.</p></article>
+                    <article class="home-feature-card"><div class="home-feature-icon" aria-hidden="true">◎</div><h3>Descubre sin prisa</h3><p>Los retos avanzan poco a poco para que cada acierto se sienta como una pequeña victoria.</p></article>
+                    <article class="home-feature-card"><div class="home-feature-icon" aria-hidden="true">♡</div><h3>Jueguen juntos</h3><p>Una experiencia para conversar, hacer preguntas y celebrar el razonamiento de los más pequeños.</p></article>
+                </div>
+            </section>
+
+            <section class="home-section" id="como-jugar" aria-labelledby="how-title">
+                <div class="home-how">
+                    <div class="home-section-heading">
+                        <p class="home-kicker">La receta del explorador</p>
+                        <h2 id="how-title">Cuatro pasos y una mesa llena de historias.</h2>
+                        <p>Solo necesitas mirar con atención y dejar que las pistas te lleven a la casilla correcta.</p>
+                    </div>
+                    <div class="home-steps">
+                        <article class="home-step"><div class="home-step-number">1</div><div><h3>Elige un reto</h3><p>Escoge una tarjeta y colócala frente a ti.</p></div></article>
+                        <article class="home-step"><div class="home-step-number">2</div><div><h3>Observa la escena</h3><p>Busca los animales y descubre su relación con cada objeto.</p></div></article>
+                        <article class="home-step"><div class="home-step-number">3</div><div><h3>Coloca las fichas</h3><p>Relaciona animal y posición en el tablero de doble entrada.</p></div></article>
+                        <article class="home-step"><div class="home-step-number">4</div><div><h3>Comprueba tu respuesta</h3><p>Voltea la tarjeta; aquí, toca una casilla para verificar.</p></div></article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="home-section" id="niveles" aria-labelledby="levels-title">
+                <div class="home-section-heading center">
+                    <p class="home-kicker">Elige tu aventura</p>
+                    <h2 id="levels-title">Tres tableros, muchas formas de mirar.</h2>
+                    <p>Empieza por el primer escenario o vuelve a jugar para encontrar nuevos detalles.</p>
+                </div>
+                <div class="home-levels-grid">
+                    <article class="home-level-card"><div class="home-level-art"><img src="images/tableros/Nivel1.svg" alt="Vista previa del tablero del nivel 1"></div><div class="home-level-info"><h3>Nivel 1</h3><a href="nivel1.html">Jugar →</a></div></article>
+                    <article class="home-level-card"><div class="home-level-art"><img src="images/tableros/Nivel2.svg" alt="Vista previa del tablero del nivel 2"></div><div class="home-level-info"><h3>Nivel 2</h3><a href="nivel2.html">Jugar →</a></div></article>
+                    <article class="home-level-card"><div class="home-level-art"><img src="images/tableros/Nivel3.svg" alt="Vista previa del tablero del nivel 3"></div><div class="home-level-info"><h3>Nivel 3</h3><a href="nivel3.html">Jugar →</a></div></article>
+                </div>
+            </section>
+        </main>
+
+        <footer class="home-footer">
+            <div class="home-footer-inner"><p><strong>Topologix</strong><br>Un juego para aprender mirando el mundo.</p><p>Proyecto escolar sin fines de lucro · Hecho para jugar en compañía.</p></div>
+        </footer>
     </div>
 
-    <!-- Hero Section -->
-    <section id="inicio" class="relative min-h-screen flex items-center overflow-hidden pt-16">
-        <div class="absolute inset-0 bg-gradient-to-br from-[var(--primary)] via-[var(--primary-light)] to-[var(--dark)]"></div>
-        <div class="hero-shape w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] lg:w-[600px] lg:h-[600px] bg-white top-[-200px] right-[-100px]"></div>
-        <div class="hero-shape w-[150px] h-[150px] sm:w-[200px] sm:h-[200px] lg:w-[300px] lg:h-[300px] bg-[var(--secondary)] bottom-[-50px] left-[-80px]"></div>
-        <div class="hero-shape w-[80px] h-[80px] sm:w-[100px] sm:h-[100px] lg:w-[150px] lg:h-[150px] bg-[var(--accent)] top-[40%] left-[10%]"></div>
-
-        <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 w-full">
-            <div class="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
-                <div class="flex-1 text-white">
-                    <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 mb-6">
-                        <span class="w-2 h-2 bg-[var(--secondary)] rounded-full animate-pulse"></span>
-                        <span class="text-sm font-medium text-white/90">Juego educativo para niños 4-7 años</span>
-                    </div>
-                    <h1 class="text-3xl sm:text-5xl lg:text-7xl font-bold mb-6 leading-tight">
-                        Aprender es
-                        <span class="text-[var(--secondary)]">divertido</span>
-                    </h1>
-                    <p class="text-lg lg:text-xl text-white/80 mb-8 max-w-lg leading-relaxed">
-                        Desarrolla el pensamiento espacial de tus hijos mientras se divierten descubriendo dónde se encuentran los animales en el tablero.
-                    </p>
-                    <div class="flex flex-col sm:flex-row flex-wrap gap-4">
-                        <a href="nivel1.html" class="inline-flex items-center justify-center gap-3 bg-[var(--secondary)] text-[var(--dark)] px-8 py-4 rounded-full font-bold text-lg hover:bg-[var(--secondary-warm)] transition-all shadow-lg hover:shadow-xl">
-                            <i class="fas fa-play"></i>
-                            Jugar ahora
-                        </a>
-                        <a href="#sobre-el-juego" class="inline-flex items-center justify-center gap-3 border-2 border-white/30 text-white px-8 py-4 rounded-full font-semibold hover:bg-white/10 transition-all">
-                            Descubrir más
-                        </a>
-                    </div>
-                    <div class="mt-8 bg-white/10 backdrop-blur-sm rounded-2xl p-5 max-w-md">
-                        <p class="text-sm text-white/80">
-                            <i class="fas fa-info-circle mr-1"></i>
-                            Proyecto escolar sin fines de lucro. Imágenes y referencias utilizadas con fines educativos.
-                        </p>
-                    </div>
-                </div>
-                <div class="flex-1 flex justify-center lg:justify-end">
-                    <div class="relative">
-                        <div class="absolute inset-0 bg-[var(--secondary)] rounded-3xl rotate-6 scale-105 opacity-20"></div>
-                        <img src="images/tableros/Nivel1.svg" alt="Tablero de Topologix" class="relative rounded-3xl shadow-2xl max-w-full w-[260px] sm:w-[340px] lg:w-[480px]">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </section>
-
-    <!-- Features Section -->
-    <section id="sobre-el-juego" class="py-16 sm:py-24 relative">
-        <div class="max-w-6xl mx-auto px-6 lg:px-8">
-            <div class="fade-in text-center mb-16">
-                <h2 class="section-title section-title-center text-[var(--primary)] text-2xl sm:text-4xl font-bold">¿Qué es Topologix?</h2>
-                <p class="mt-6 text-gray-500 text-lg max-w-2xl mx-auto">
-                    Un juego de mesa que convierte el aprendizaje espacial en una aventura para los más pequeños
-                </p>
-            </div>
-
-            <div class="fade-in grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center mb-16 lg:mb-20">
-                <div>
-                    <p class="text-lg text-gray-600 mb-6 leading-relaxed">
-                        Topologix es un juego pensado para niños de 4 a 7 años que transforma el aprendizaje de conceptos espaciales en una experiencia lúdica y memorable.
-                    </p>
-                    <p class="text-gray-500 mb-6 leading-relaxed">
-                        Un tablero con una cuadrícula de 5×5, animales adorables y ubicaciones por descubrir. Los niños deberán interpretar tarjetas con pistas para descubrir la posición exacta de cada elemento.
-                    </p>
-                    <p class="text-gray-500 mb-8 leading-relaxed">
-                        Con Topologix, los pequeños aprenden conceptos fundamentales mientras desarrollan su capacidad de razonamiento:
-                    </p>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="flex items-center gap-3 bg-white rounded-xl p-4 shadow-sm">
-                            <div class="w-10 h-10 rounded-full bg-[var(--primary)]/10 flex items-center justify-center shrink-0">
-                                <i class="fas fa-arrow-up text-[var(--primary)] text-sm"></i>
-                            </div>
-                            <span class="font-medium text-gray-700">Arriba / Abajo</span>
-                        </div>
-                        <div class="flex items-center gap-3 bg-white rounded-xl p-4 shadow-sm">
-                            <div class="w-10 h-10 rounded-full bg-[var(--primary)]/10 flex items-center justify-center shrink-0">
-                                <i class="fas fa-arrows-left-right text-[var(--primary)] text-sm"></i>
-                            </div>
-                            <span class="font-medium text-gray-700">Izquierda / Derecha</span>
-                        </div>
-                        <div class="flex items-center gap-3 bg-white rounded-xl p-4 shadow-sm">
-                            <div class="w-10 h-10 rounded-full bg-[var(--primary)]/10 flex items-center justify-center shrink-0">
-                                <i class="fas fa-table-cells text-[var(--primary)] text-sm"></i>
-                            </div>
-                            <span class="font-medium text-gray-700">Fila / Columna</span>
-                        </div>
-                        <div class="flex items-center gap-3 bg-white rounded-xl p-4 shadow-sm">
-                            <div class="w-10 h-10 rounded-full bg-[var(--primary)]/10 flex items-center justify-center shrink-0">
-                                <i class="fas fa-circle-dot text-[var(--primary)] text-sm"></i>
-                            </div>
-                            <span class="font-medium text-gray-700">Dentro / Fuera</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex justify-center gap-4 sm:gap-6">
-                    <img src="images/animales/ave.png" alt="Pájaro" class="character-icon w-14 h-14 sm:w-20 sm:h-20 rounded-2xl bg-white p-2 sm:p-3 shadow-lg">
-                    <img src="images/animales/oso.png" alt="Oso" class="character-icon w-14 h-14 sm:w-20 sm:h-20 rounded-2xl bg-white p-2 sm:p-3 shadow-lg mt-6 sm:mt-8">
-                    <img src="images/animales/rana.png" alt="Rana" class="character-icon w-14 h-14 sm:w-20 sm:h-20 rounded-2xl bg-white p-2 sm:p-3 shadow-lg mt-3 sm:mt-4">
-                </div>
-            </div>
-
-            <div class="fade-in grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm card-hover border border-gray-100">
-                    <div class="w-14 h-14 rounded-2xl bg-[var(--primary)]/10 flex items-center justify-center mb-5">
-                        <i class="fas fa-brain text-[var(--primary)] text-xl"></i>
-                    </div>
-                    <h3 class="text-lg sm:text-xl font-bold text-gray-800 mb-3">Desarrollo Cognitivo</h3>
-                    <p class="text-gray-500 leading-relaxed">Estimula el razonamiento lógico, la percepción espacial y la capacidad de resolver problemas de forma natural.</p>
-                </div>
-                <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm card-hover border border-gray-100">
-                    <div class="w-14 h-14 rounded-2xl bg-[var(--secondary)]/20 flex items-center justify-center mb-5">
-                        <i class="fas fa-graduation-cap text-[var(--accent)] text-xl"></i>
-                    </div>
-                    <h3 class="text-lg sm:text-xl font-bold text-gray-800 mb-3">Aprendizaje Divertido</h3>
-                    <p class="text-gray-500 leading-relaxed">Los niños adquieren conceptos espaciales a través del juego, sin darse cuenta de que están aprendiendo.</p>
-                </div>
-                <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm card-hover border border-gray-100">
-                    <div class="w-14 h-14 rounded-2xl bg-[var(--accent)]/10 flex items-center justify-center mb-5">
-                        <i class="fas fa-people-group text-[var(--accent)] text-xl"></i>
-                    </div>
-                    <h3 class="text-lg sm:text-xl font-bold text-gray-800 mb-3">Juego Cooperativo</h3>
-                    <p class="text-gray-500 leading-relaxed">Fomenta la interacción entre padres e hijos, creando momentos de conexión mientras aprenden juntos.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- How to Play Section -->
-    <section id="como-jugar" class="py-16 sm:py-24 bg-white">
-        <div class="max-w-6xl mx-auto px-6 lg:px-8">
-            <div class="fade-in text-center mb-16">
-                <h2 class="section-title section-title-center text-[var(--primary)] text-2xl sm:text-4xl font-bold">¿Cómo se juega?</h2>
-                <p class="mt-6 text-gray-500 text-lg max-w-xl mx-auto">
-                    Cuatro pasos simples para empezar a jugar y aprender
-                </p>
-            </div>
-
-            <div class="fade-in grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
-                <div class="space-y-1">
-                    <div class="step-line relative flex gap-5 pb-8">
-                        <div class="relative z-10 w-10 h-10 rounded-full bg-[var(--primary)] text-white flex items-center justify-center font-bold text-sm shrink-0 shadow-md">
-                            1
-                        </div>
-                        <div class="bg-[var(--light)] rounded-2xl p-4 sm:p-6 flex-1">
-                            <h4 class="font-bold text-gray-800 text-lg mb-2">Prepara el escenario</h4>
-                            <p class="text-gray-500 text-sm leading-relaxed">Coloca el tablero en el centro de la mesa y ten las fichas de animales y los elementos de ubicación listos para usar.</p>
-                        </div>
-                    </div>
-                    <div class="step-line relative flex gap-5 pb-8">
-                        <div class="relative z-10 w-10 h-10 rounded-full bg-[var(--primary)] text-white flex items-center justify-center font-bold text-sm shrink-0 shadow-md">
-                            2
-                        </div>
-                        <div class="bg-[var(--light)] rounded-2xl p-4 sm:p-6 flex-1">
-                            <h4 class="font-bold text-gray-800 text-lg mb-2">Elige tu desafío</h4>
-                            <p class="text-gray-500 text-sm leading-relaxed">Selecciona una tarjeta de desafío que muestra pistas sobre la ubicación de los diferentes elementos en el tablero.</p>
-                        </div>
-                    </div>
-                    <div class="step-line relative flex gap-5 pb-8">
-                        <div class="relative z-10 w-10 h-10 rounded-full bg-[var(--primary)] text-white flex items-center justify-center font-bold text-sm shrink-0 shadow-md">
-                            3
-                        </div>
-                        <div class="bg-[var(--light)] rounded-2xl p-4 sm:p-6 flex-1">
-                            <h4 class="font-bold text-gray-800 text-lg mb-2">Ubica los animales</h4>
-                            <p class="text-gray-500 text-sm leading-relaxed">Interpreta las pistas y coloca cada animal en su posición correcta dentro de la cuadrícula del tablero.</p>
-                        </div>
-                    </div>
-                    <div class="step-line relative flex gap-5">
-                        <div class="relative z-10 w-10 h-10 rounded-full bg-[var(--accent)] text-white flex items-center justify-center font-bold text-sm shrink-0 shadow-md">
-                            4
-                        </div>
-                        <div class="bg-[var(--light)] rounded-2xl p-4 sm:p-6 flex-1">
-                            <h4 class="font-bold text-gray-800 text-lg mb-2">Verifica tu solución</h4>
-                            <p class="text-gray-500 text-sm leading-relaxed">Comprueba si ubicaste correctamente todos los elementos. ¡Si aciertas, un sonido de celebración te esperará!</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="rounded-2xl overflow-hidden shadow-lg mb-6 bg-gray-100">
-                        <iframe class="w-full aspect-video" src="https://www.youtube.com/embed/qRRAVLFpzzM?si=677wvhYYCDfJbjuk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    </div>
-                    <div class="bg-[var(--light)] rounded-2xl p-4 sm:p-6">
-                        <h4 class="font-bold text-gray-800 mb-4 flex items-center gap-2">
-                            <i class="fas fa-box-open text-[var(--primary)]"></i>
-                            Contenido del juego
-                        </h4>
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                            <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 rounded-full bg-[var(--primary)]/10 flex items-center justify-center shrink-0">
-                                    <span class="text-[var(--primary)] font-bold text-sm">3</span>
-                                </div>
-                                <span class="text-sm text-gray-600">Tableros de juego</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 rounded-full bg-[var(--secondary)]/20 flex items-center justify-center shrink-0">
-                                    <span class="text-[var(--accent)] font-bold text-sm">5</span>
-                                </div>
-                                <span class="text-sm text-gray-600">Fichas de animales</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 rounded-full bg-[var(--accent)]/10 flex items-center justify-center shrink-0">
-                                    <i class="fas fa-book text-[var(--accent)] text-xs"></i>
-                                </div>
-                                <span class="text-sm text-gray-600">Instrucciones incluidas</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Gallery Section -->
-    <section id="galeria" class="py-16 sm:py-24">
-        <div class="max-w-6xl mx-auto px-6 lg:px-8">
-            <div class="fade-in text-center mb-16">
-                <h2 class="section-title section-title-center text-[var(--primary)] text-2xl sm:text-4xl font-bold">Galería</h2>
-                <p class="mt-6 text-gray-500 text-lg max-w-xl mx-auto">
-                    Imágenes del juego y momentos de diversión
-                </p>
-            </div>
-
-            <div class="fade-in grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
-                <div class="col-span-2 row-span-2 aspect-square">
-                    <img src="https://1.bp.blogspot.com/-03NBFs__rFk/XDNbr7XJG5I/AAAAAAAAJp8/Hvo-NYuTFvAME_WczRr6qDvqRYgf8STtwCLcBGAs/s1600/P1420977.JPG" alt="Niños jugando Topologix" class="w-full h-full object-cover rounded-2xl shadow-md gallery-item">
-                </div>
-                <div class="aspect-square">
-                    <img src="https://kreatywnewrota.pl/wp-content/uploads/2017/03/IMG_3522-1024x683.jpg" alt="Tablero de juego" class="w-full h-full object-cover rounded-2xl shadow-md gallery-item">
-                </div>
-                <div class="aspect-square">
-                    <img src="https://www.didacto.com/7877-thickbox_default/topologix.jpg" alt="Tarjetas de desafío" class="w-full h-full object-cover rounded-2xl shadow-md gallery-item">
-                </div>
-                <div class="aspect-square">
-                    <img src="https://www.allomaari.net/wordpress/wp-content/uploads/2022/01/dj08354_1-1topo.jpg" alt="Ejemplo de juego" class="w-full h-full object-cover rounded-2xl shadow-md gallery-item">
-                </div>
-                <div class="aspect-square">
-                    <img src="https://i.ytimg.com/vi/gH1W_hnBLHI/maxresdefault.jpg" alt="Componentes del juego" class="w-full h-full object-cover rounded-2xl shadow-md gallery-item">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-[var(--dark)] text-white py-8 sm:py-12">
-        <div class="max-w-6xl mx-auto px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-                <div class="text-center md:text-left">
-                    <h4 class="font-bold text-lg mb-1">Topologix</h4>
-                    <p class="text-white/60 text-sm">Proyecto escolar sin fines de lucro. Hecho con <i class="fas fa-heart text-[var(--accent)] text-xs"></i> para los más pequeños.</p>
-                </div>
-                <div class="text-center md:text-right">
-                    <p class="text-white/60 text-sm">&copy; 2025 Proyecto Educativo</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
     <script>
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-        const menuToggle = document.getElementById('menuToggle');
-        const menuClose = document.getElementById('menuClose');
-        const mobileMenu = document.getElementById('mobileMenu');
-
-        function openMenu() {
-            mobileMenu.classList.remove('hidden');
-            document.body.classList.add('overflow-hidden');
-            menuToggle.setAttribute('aria-expanded', 'true');
-        }
-
-        function closeMenu() {
-            mobileMenu.classList.add('hidden');
-            document.body.classList.remove('overflow-hidden');
-            menuToggle.setAttribute('aria-expanded', 'false');
-        }
+        const homeNav = document.getElementById('home-nav');
+        const menuToggle = document.getElementById('menu-toggle');
 
         menuToggle.addEventListener('click', () => {
-            if (mobileMenu.classList.contains('hidden')) {
-                openMenu();
-            } else {
-                closeMenu();
-            }
-        });
-        menuClose.addEventListener('click', closeMenu);
-
-        mobileMenu.addEventListener('click', (e) => {
-            if (e.target === mobileMenu) closeMenu();
+            const isOpen = homeNav.classList.toggle('is-open');
+            menuToggle.setAttribute('aria-expanded', String(isOpen));
+            menuToggle.textContent = isOpen ? '×' : '☰';
         });
 
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
-                closeMenu();
+        homeNav.querySelectorAll('a').forEach((link) => {
+            link.addEventListener('click', () => {
+                homeNav.classList.remove('is-open');
+                menuToggle.setAttribute('aria-expanded', 'false');
+                menuToggle.textContent = '☰';
+            });
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                homeNav.classList.remove('is-open');
+                menuToggle.setAttribute('aria-expanded', 'false');
+                menuToggle.textContent = '☰';
             }
         });
     </script>
 </body>
+
 </html>
